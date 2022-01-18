@@ -8,3 +8,7 @@
 Code the Dream offers free intensive training in software development to people from diverse low-income backgrounds. Its Practicum curriculum offers opportunities for the Code the Dream School trainees to work collaboratively in dev teams on real-life, deployable software engineering projects. This project was the work by team Slaty Egret to develop a todo app bootstrapped with [Create Next App](https://create-next-app.js.org/) supported by [Firebase](https://firebase.google.com/) Authentocation and Cloud Firestore.
 
 ## Getting Started
+
+## Authors
+
+Chung Kao
