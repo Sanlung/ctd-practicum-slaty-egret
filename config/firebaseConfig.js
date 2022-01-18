@@ -11,5 +11,11 @@ const firebaseConfig = {
 
 export const firebaseApp = initializeApp(firebaseConfig);
 
-// invoke the Firebase App object like so in other files:
+// Import the firebase object ("firebaseApp") like so in other files:
 // import {firebaseApp} from "../config/firebaseConfig"
+// Create an auth object ("auth") like so in other files:
+// import {getAuth} from "firebase/auth";
+// const auth = getAuth(firebaseApp);
+// Create a firestore object ("db") like so in other files:
+// import {getFirestore} from "firebase/firestore";
+// const db = getFirestore(firebaseApp);
