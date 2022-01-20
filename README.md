@@ -13,3 +13,4 @@ Code the Dream offers free intensive training in software development to people 
 
 Chung Kao
 Ignat Babenko
+Asel Karagazieva
