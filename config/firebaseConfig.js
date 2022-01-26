@@ -1,5 +1,7 @@
 import {initializeApp} from "firebase/app";
 
+import {getFirestore} from "firebase/firestore";
+
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -9,7 +11,10 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-export const firebaseApp = initializeApp(firebaseConfig);
+// export const firebaseApp = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+export {db }
 
 // Import the firebase object ("firebaseApp") like so in other files:
 // import {firebaseApp} from "../config/firebaseConfig"

@@ -1,5 +1,7 @@
 import Head from "next/head";
 import {siteTitle} from "../components/layout";
+import TodoForm from "../components/TodoForm";
+import TodoList from "../components/TodoList";
 
 const Home = () => {
   return (
@@ -13,6 +15,8 @@ const Home = () => {
           <span className='logo'>hatodo App</span>{" "}
         </h1>
         <p>Welcome aboard. Let&apos;s get our hands dirty!</p>
+      <TodoForm />
+      <TodoList />
       </div>
     </>
   );
