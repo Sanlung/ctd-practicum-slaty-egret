@@ -1,0 +1,88 @@
+Here is a reference to the data model for our app. The object keys are arbitrarily named at this time.
+
+// in local React state:
+[
+  {
+    docId: "hash1",
+    docTitle: "Shopping",
+    docContent: [
+      {
+        docId: "has1-1",
+        timeStamp: "xx",
+        todo: "Buy books",
+      },
+      {
+        docId: "hash1-2",
+        timeStamp: "xx",
+        todo: "Buy cloths",
+      },
+    ],
+  },
+  {
+    docId: "hash2",
+    docTitle: "Grocery",
+    docContent: [
+      {
+        docId: "has2-1",
+        timeStamp: "xx",
+        todo: "Buy grocery",
+      },
+      {
+        docId: "hash2-2",
+        timeStamp: "xx",
+        todo: "Buy fruit",
+      },
+    ],
+  },
+];
+
+// on Firebase
+[    <-- our database that's an array of data objects
+  {             <-- a collection (an object)
+    user1AuthdocId:   // that contains an array
+    [
+      {                 <-- a document (an object)
+        docId: "hash1",   // that is a collection
+        docTitle:  "Shopping",
+        docContent:[      // that contains an array
+          {           <-- a document (an object)
+            docId: "hash1-1",
+            timeStamp: "xx",
+            todo1: "Buy books", <-- the single todo
+          },
+          {
+            docId: "hash1-2",
+            timeStamp: "xx",
+            todo2: "Buy cloths",
+          },
+        ],
+      },
+      {
+        docId: "hash2",
+        docTitle: "Grocery",
+        docContent: [
+          {
+            docId: "hash2-1",
+            timeStamp: "xx",
+            todo3: "Buy grocery",
+          },
+          {
+            docId: "hash2-2",
+            timeStamp: "xx",
+            todo4: "Buy fruit",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    user2AuthId: [
+    .......
+    ],
+  },
+  {
+    user3AuthId: [
+    .......
+    ],
+  }
+]
