@@ -1,11 +1,11 @@
-import TodoList from "./TodoList";
-import AddNewEntryForm from "../AddNewEntryForm";
+// import TodoList from "./TodoList";
+// import AddNewEntryForm from "../AddNewEntryForm";
 
-const ListPane = () => (
-  <>
-    <TodoList />
-    <AddNewEntryForm />
-  </>
-);
+// const ListPane = () => (
+//   <>
+//     <TodoList />
+//     <AddNewEntryForm />
+//   </>
+// );
 
-export default ListPane;
+// export default ListPane;

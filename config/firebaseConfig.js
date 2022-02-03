@@ -1,4 +1,5 @@
 import {initializeApp} from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_PUBLIC_API_KEY,
@@ -8,6 +9,9 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+const app = initializeApp(firebaseConfig);
+const db = getFirestore();
+export {db}
 
 export const firebaseApp = initializeApp(firebaseConfig);
 

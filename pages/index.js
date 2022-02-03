@@ -3,7 +3,7 @@ import Layout, {siteTitle} from "../components/Layout";
 
 const Home = () => {
   return (
-    <Layout home>
+    <Layout home> 
       <Head>
         <title>{siteTitle}</title>
       </Head>
