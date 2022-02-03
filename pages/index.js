@@ -1,24 +1,15 @@
 import Head from "next/head";
-import { siteTitle } from "../components/layout";
-import App from "../components/App";
-import Navbar from "../components/Navbar"
+import Layout, { siteTitle } from "../components/Layout";
+import Login from "../components/login/Login";
 
 const Home = () => {
   return (
-    <>
+    <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <div>
-        <h1>
-          <span className='logo-w'>W</span>
-          <span className='logo'>hatodo App</span>{" "}
-        </h1>
-        <Navbar />
-        <p>Welcome aboard. Let&apos;s get our hands dirty!</p>
-        <App />
-      </div>
-    </>
+      <Login />
+    </Layout>
   );
 };
 

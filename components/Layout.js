@@ -1,11 +1,12 @@
 import Head from "next/head";
-import Header from "./header";
-import Footer from "./footer";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import Sidebar from "./sidebar/Sidebar";
 
 export const siteTitle = "Whatodo App Website";
 
-const Layout = ({children}) => (
-  <div>
+const Layout = ({children, home}) => (
+  <>
     <Head>
       <link rel='icon' href='/favicon.ico' />
       <meta name='viewport' content='width=device-width, initial-scale=1.0' />
@@ -20,9 +21,12 @@ const Layout = ({children}) => (
       <meta name='title' content={siteTitle} />
     </Head>
     <Header />
-    <main>{children}</main>
+    <main>
+      {!home && <Sidebar />}
+      {children}
+    </main>
     <Footer />
-  </div>
+  </>
 );
 
 export default Layout;
