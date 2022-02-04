@@ -1,13 +1,12 @@
 import Image from 'next/image'
+import Whatodogrey from '../../public/images/Whatodogrey.svg'
 
 const Logo = () => {
     return (
         <>
             <Image 
-            src="/../public/images/Whatodogrey.svg"
-            alt="Logos"
-            width="150"
-            height="150"
+            src={Whatodogrey}
+            alt="Logos" 
             />
         </>
     )
