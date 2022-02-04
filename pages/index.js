@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Layout, { siteTitle } from "../components/Layout";
-import Login from "../components/login/Login";
+import LoginForm from "../components/auth/LoginForm";
+import SignUpForm from "../components/auth/SignUpForm";
 
 const Home = () => {
   return (
@@ -8,7 +9,9 @@ const Home = () => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <Login />
+      <LoginForm />
+      <br></br>
+      <SignUpForm />
     </Layout>
   );
 };
