@@ -1,10 +1,14 @@
 import TodoListItem from "./TodoListItem";
 
-const TodoList = ({list}) => (
+const TodoList = ({list, onRemoveTodo}) => (
   <>
     <ul>
-      {list.map(item => (
-        <TodoListItem key={item.timeStamp} item={item} />
+      {list.map((item) => (
+        <TodoListItem
+          key={item.timeStamp}
+          item={item}
+          onRemoveTodo={onRemoveTodo}
+        />
       ))}
     </ul>
   </>

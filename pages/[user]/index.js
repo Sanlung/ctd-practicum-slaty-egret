@@ -14,7 +14,7 @@ const LoggedIn = () => {
       </Head>
       <Sidebar userId={user} />
       <ListPane>
-        <h1>There&apos;s no content here</h1>
+        <h2>There&apos;s no content here</h2>
       </ListPane>
     </>
   );

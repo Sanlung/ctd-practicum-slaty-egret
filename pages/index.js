@@ -9,7 +9,7 @@ const Home = () => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <h1>Render login/signup form here</h1>
+      <h2>Render login/signup form here</h2>
       <button
         type='button'
         onClick={() =>
