@@ -1,5 +1,4 @@
 import {useState, useEffect, useCallback} from "react";
-import {useRouter} from "next/router";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {firebaseApp} from "../../config/firebaseConfig";
 import SearchTodos from "./SearchTodos";
@@ -7,11 +6,10 @@ import TodoListsNav from "./TodoListsNav";
 import AddNewEntryForm from "../AddNewEntryForm";
 
 const Sidebar = ({userId}) => {
-  const router = useRouter();
   const [todoLists, setTodoLists] = useState([]);
   const db = getFirestore(firebaseApp);
   const colRef = collection(db, userId);
-  const fetchUserData = useCallback(async () => {
+  const fetchUserData = async () => {
     const querySnapShot = await getDocs(colRef);
     const lists = querySnapShot.docs.map(doc => ({
       id: doc.id,
@@ -19,9 +17,9 @@ const Sidebar = ({userId}) => {
     }));
     setTodoLists(lists);
     // console.log(todoLists);
-  }, [colRef]);
+  };
 
-  useEffect(() => fetchUserData(), [fetchUserData]);
+  useEffect(() => fetchUserData(), []);
 
   return (
     <aside>
