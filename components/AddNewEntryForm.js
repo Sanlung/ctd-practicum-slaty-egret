@@ -1,7 +1,7 @@
-const AddNewEntryForm = ({entryType, addFunc}) => (
+const AddNewEntryForm = ({addFunc, children}) => (
   <div>
     <button type='button' onClick={addFunc}>
-      {/* <FontAwesomeIcon icon={faPlus} /> */}Add {entryType}
+      {children}
     </button>
   </div>
 );

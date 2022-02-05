@@ -1,9 +1,13 @@
-// import Link from "next/link";
+import Link from "next/link";
 
-const TodoListsNavItem = ({list}) => {
+const TodoListsNavItem = ({user, listName}) => {
   return (
     <li>
-      <a>First List</a>
+      <Link href={`/${user}/${listName}`}>
+        <a>
+          <span>{listName}</span>
+        </a>
+      </Link>
       <button type='button'>Remove</button>
     </li>
   );

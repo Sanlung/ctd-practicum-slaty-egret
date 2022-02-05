@@ -1,6 +1,6 @@
 const TodoListItem = ({item}) => (
   <li>
-    <span>{item.title}</span>
+    <span>{item.todo}</span>
     <button type='button'>Remove</button>
   </li>
 );

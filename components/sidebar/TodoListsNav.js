@@ -1,12 +1,10 @@
 import TodoListsNavItem from "./TodoListsNavItem";
 
-const lists = [{id: "1", title: "First List"}];
-
-const TodoListsNav = () => (
+const TodoListsNav = ({user, lists}) => (
   <>
     <ul>
-      {lists.map((list) => (
-        <TodoListsNavItem key={list.id} list={list} />
+      {lists.map(list => (
+        <TodoListsNavItem key={list.id} user={user} listName={list.id} />
       ))}
     </ul>
   </>
