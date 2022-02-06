@@ -1,11 +1,10 @@
 import Head from "next/head";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import Sidebar from "./sidebar/Sidebar";
 
 export const siteTitle = "Whatodo App Website";
 
-const Layout = ({home, userId, children}) => {
+const Layout = ({children}) => {
   return (
     <>
       <Head>
@@ -22,14 +21,7 @@ const Layout = ({home, userId, children}) => {
         <meta name='title' content={siteTitle} />
       </Head>
       <Header />
-      <main>
-        {!home && (
-          <>
-            <Sidebar userId={userId} />
-          </>
-        )}
-        {children}
-      </main>
+      <main>{children}</main>
       <Footer />
     </>
   );
