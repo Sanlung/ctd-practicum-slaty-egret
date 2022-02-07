@@ -1,4 +1,5 @@
 import Head from "next/head";
+<<<<<<< HEAD
 import { useRouter } from "next/router";
 import { siteTitle } from "../components/Layout";
 import {
@@ -58,6 +59,10 @@ const createAccount = async () => {
 
 btnSignup.addEventListener("click", createAccount);
 
+=======
+import {useRouter} from "next/router";
+import {siteTitle} from "../components/Layout";
+>>>>>>> main
 
 const Home = () => {
   const router = useRouter();
@@ -66,9 +71,13 @@ const Home = () => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
+<<<<<<< HEAD
       <LoginForm />
       <br></br>
       <SignUpForm />
+=======
+      <h2>Render login/signup form here</h2>
+>>>>>>> main
       <button
         type='button'
         onClick={() =>
