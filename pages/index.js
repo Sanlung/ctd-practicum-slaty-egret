@@ -1,95 +1,124 @@
 import Head from "next/head";
-<<<<<<< HEAD
 import { useRouter } from "next/router";
+import { useState } from 'react';
 import { siteTitle } from "../components/Layout";
 import {
   getAuth,
-  connectAuthEmulator,
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  onAuthStateChanged
 } from "firebase/auth"
 import { firebaseApp } from "../config/firebaseConfig";
-import {
-  txtEmail,
-  txtPassword,
-  btnLogin,
-  btnSignup
-} from "../config/authUI";
-import LoginForm from "../components/login/LoginForm";
-import SignUpForm from "../components/login/SignUpForm";
-import { async } from "@firebase/util";
 
 
-const auth = getAuth(firebaseApp);
-connectAuthEmulator(auth, "http://localhost:9099");
-
-//Logging in:
-
-const loginEmailPassword = async () => {
-  const loginEmail = txtEmail.value;
-  const loginPassword = txtPassword.value;
-  try {
-    const userCredential = await signInWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
-  }
-  catch (error) {
-    console.log(error);
-
-  }
-}
-
-btnLogin.addEventListener("click", loginEmailPassword);
-
-
-//Creating account:
-
-const createAccount = async () => {
-  const loginEmail = txtEmail.value;
-  const loginPassword = txtPassword.value;
-
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, loginEmail, loginPassword);
-    console.log(userCredential.user);
-  }
-  catch (error) {
-    console.log(error);
-
-  }
-}
-
-btnSignup.addEventListener("click", createAccount);
-
-=======
-import {useRouter} from "next/router";
-import {siteTitle} from "../components/Layout";
->>>>>>> main
 
 const Home = () => {
+
   const router = useRouter();
+  const auth = getAuth(firebaseApp);
+
+  const [loginEmail, setLoginEmail] = useState('');
+  const [loginPassword, setLoginPassword] = useState('');
+  const [userName, setUserName] = useState('');
+  const [signupEmail, setSignupEmail] = useState('');
+  const [signupPassword, setSignupPassword] = useState('');
+  const [signupPassConf, setSignupPassConf] = useState('');
+  const [loginNotification, setLoginNotification] = useState('');
+  const [signupNotification, setSignupNotification] = useState('');
+
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const uid = user.uid;
+    } else {
+
+    }
+  });
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then(
+        setLoginNotification(
+          'You are logged in'
+        ),
+        setTimeout(() => {
+          setLoginNotification('')
+        }, 2000)
+      )
+      .catch((err) => {
+        console.log(err.code, err.message)
+        setLoginNotification(err.message)
+        setTimeout(() => {
+          setLoginNotification('')
+        }, 2000)
+      })
+    setLoginEmail('')
+    setLoginPassword('')
+    router.push({
+      pathname: "/[user]",
+      query: {
+        user: "user1AuthId",
+      },
+    })
+  }
+
+  const handleSignup = (e) => {
+    e.preventDefault();
+    if (signupPassword !== signupPassConf) {
+      setSignupNotification(
+        'Password and password confirmation does not match'
+      )
+      setTimeout(() => {
+        setSignupNotification('')
+      }, 2000)
+      setSignupPassword('');
+      setSignupPassConf('');
+      return null;
+    }
+    createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+      .catch((err) => {
+        console.log(err.code, err.message)
+      });
+    router.push("/")
+  }
+
+
   return (
     <>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-<<<<<<< HEAD
-      <LoginForm />
-      <br></br>
-      <SignUpForm />
-=======
-      <h2>Render login/signup form here</h2>
->>>>>>> main
-      <button
-        type='button'
-        onClick={() =>
-          router.push({
-            pathname: "/[user]",
-            query: {
-              user: "user1AuthId",
-            },
-          })
-        }>
-        Login
-      </button>
+
+      <div>
+        <h1>Login</h1>
+        {loginNotification}
+        <form onSubmit={handleLogin}>
+          Email: <input type="text" value={loginEmail}
+            onChange={({ target }) => setLoginEmail(target.value)} />
+          <br />
+          Password: <input type="password" value={loginPassword}
+            onChange={({ target }) => setLoginPassword(target.value)} />
+          <br />
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      <br />
+      <div>
+        <h1>Sign up</h1>
+        {signupNotification}
+        <form onSubmit={handleSignup}>
+          Email: <input type="text" value={signupEmail}
+            onChange={({ target }) => setSignupEmail(target.value)} />
+          <br />
+          Password: <input type="password" value={signupPassword}
+            onChange={({ target }) => setSignupPassword(target.value)} />
+          <br />
+          Password conf: <input type="password" value={signupPassConf}
+            onChange={({ target }) => setSignupPassConf(target.value)} />
+          <br />
+          <button type="submit">Sign up</button>
+        </form>
+      </div>
     </>
   );
 };
