@@ -1,6 +1,6 @@
 const SubmitButton = () => (
     <div>
-        <button type='button'>Submit</button>
+        <button type='submit'>Submit</button>
     </div>
 );
 

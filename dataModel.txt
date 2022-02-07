@@ -1,75 +1,63 @@
-Here is a reference to the data model for our app. The object keys are arbitrarily named at this time.
+Here is the data model for our app. The structure and all the data types and keys will be carried through development, except the variable "user#AuthId"
 
 // in local React state:
 [
-  {
-    docId: "hash1",
-    docTitle: "Shopping",
-    docContent: [
+  {             <--- only one user's data is used for
+    id: "School",   // an instance of the app
+    todos:[
       {
-        docId: "has1-1",
-        timeStamp: "xx",
+        timeStamp: number by Date.now(),
         todo: "Buy books",
       },
       {
-        docId: "hash1-2",
-        timeStamp: "xx",
+        timeStamp: number,
         todo: "Buy cloths",
       },
     ],
   },
   {
-    docId: "hash2",
-    docTitle: "Grocery",
-    docContent: [
+    id: "Grocery",
+    todos: [
       {
-        docId: "has2-1",
-        timeStamp: "xx",
+        timeStamp: number,
         todo: "Buy grocery",
       },
       {
-        docId: "hash2-2",
-        timeStamp: "xx",
+        timeStamp: number,
         todo: "Buy fruit",
       },
     ],
   },
-];
+]
 
 // on Firebase
 [    <-- our database that's an array of data objects
-  {             <-- a collection (an object)
-    user1AuthdocId:   // that contains an array
+  {             <-- each object is a user's todo lists
+    user1AuthId:   // in an array keyed by userId
     [
       {                 <-- a document (an object)
-        docId: "hash1",   // that is a collection
-        docTitle:  "Shopping",
-        docContent:[      // that contains an array
+        id: "School",   // with props of "id" (list name)
+        todos:[         // and "todos" (array)
           {           <-- a document (an object)
-            docId: "hash1-1",
-            timeStamp: "xx",
-            todo1: "Buy books", <-- the single todo
+            timeStamp: number by Date.now(),
+            todo: "Buy books", <-- the single todo
           },
           {
-            docId: "hash1-2",
-            timeStamp: "xx",
-            todo2: "Buy cloths",
+            timeStamp: number,
+            todo: "Buy cloths",
           },
         ],
       },
       {
-        docId: "hash2",
-        docTitle: "Grocery",
-        docContent: [
+        id: "Grocery",
+        todos: [
           {
-            docId: "hash2-1",
-            timeStamp: "xx",
-            todo3: "Buy grocery",
+            timeStamp: number,
+            todo: "Buy grocery",
           },
           {
-            docId: "hash2-2",
-            timeStamp: "xx",
-            todo4: "Buy fruit",
+            timeStamp: number,
+            todo: "Buy fruit",
           },
         ],
       },

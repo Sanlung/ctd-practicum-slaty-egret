@@ -1,6 +1,7 @@
 const PasswordInputWithLabel = () => (
     <div>
-        <input type="password"></input>
+        <input type="password" id="txtPassword" value={password}
+            onChange={({ target }) => setPassword(target.value)} />
         <label>Password</label>
     </div>
 );

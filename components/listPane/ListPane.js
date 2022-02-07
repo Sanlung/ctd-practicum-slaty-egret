@@ -1,11 +1,5 @@
-import TodoList from "./TodoList";
-import AddNewEntryForm from "../AddNewEntryForm";
-
-const ListPane = () => (
-  <>
-    <TodoList />
-    <AddNewEntryForm />
-  </>
-);
+const ListPane = ({children}) => {
+  return <div>{children}</div>;
+};
 
 export default ListPane;

@@ -1,6 +1,7 @@
 const NameInputWithLabel = () => (
     <div>
-        <input type="name"></input>
+        <input type="text" value={userName}
+            onChange={({ target }) => setUsername(target.value)} />
         <label>Name</label>
     </div>
 );
