@@ -1,6 +1,10 @@
-const TodoListItem = ({item, onRemoveTodo}) => (
+const TodoListItem = ({item, highlight, onRemoveTodo}) => (
   <li>
-    <span>{item.todo}</span>{" "}
+    {highlight ? (
+      <span className='highlight'>{item.todo}</span>
+    ) : (
+      <span>{item.todo}</span>
+    )}{" "}
     <button type='button' onClick={() => onRemoveTodo(item)}>
       ✔︎
     </button>

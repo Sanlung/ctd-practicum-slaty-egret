@@ -1,6 +1,6 @@
 import TodoListsNavItem from "./TodoListsNavItem";
 
-const TodoListsNav = ({userId, lists, onRemoveList}) => (
+const TodoListsNav = ({userId, lists, searchTerm, onRemoveList}) => (
   <>
     <ul>
       {lists.map((list) => (
@@ -9,6 +9,7 @@ const TodoListsNav = ({userId, lists, onRemoveList}) => (
           user={userId}
           listName={list.id}
           listCount={list.todos.length}
+          highlight={list.id.toLowerCase().includes(searchTerm)}
           onRemoveList={onRemoveList}
         />
       ))}
