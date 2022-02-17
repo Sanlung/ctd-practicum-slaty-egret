@@ -43,9 +43,16 @@ const LoginForm = () => {
             <div>
                 <h1>Log in</h1>
                 <form onSubmit={handleLogin}>
-                    <EmailInputWithLabel value={loginEmail} onChange={handleEmail} />
+                    <EmailInputWithLabel
+                        value={loginEmail}
+                        onChange={handleEmail}
+                    />
                     <br />
-                    <PasswordInputWithLabel value={loginPassword} onChange={handlePassword} labelTextContent='Password' />
+                    <PasswordInputWithLabel
+                        value={loginPassword}
+                        onChange={handlePassword}
+                        labelTextContent='Password'
+                    />
                     <br />
                     <SubmitButton buttonTextContent='Log in' />
                     <br />

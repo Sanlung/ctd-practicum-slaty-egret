@@ -1,9 +1,7 @@
 import Link from "next/link";
-import { useState } from "react";
 import {
   getAuth,
-  signOut,
-  onAuthStateChanged
+  signOut
 } from "firebase/auth"
 import { firebaseApp } from "../../config/firebaseConfig";
 
@@ -11,24 +9,11 @@ import { firebaseApp } from "../../config/firebaseConfig";
 const LogoutButton = () => {
 
   const auth = getAuth(firebaseApp);
-  const [logoutNotification, setLogoutNotification] = useState('');
 
   const handleLogout = (e) => {
     e.preventDefault();
-    signOut(auth)
-      .then(() => {
-        console.log('User is logged out')
-      });
+    signOut(auth);
   };
-
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const uid = user.uid;
-      console.log(uid);
-    } else {
-      console.log('User is signed out');
-    }
-  });
 
   return (
     <>

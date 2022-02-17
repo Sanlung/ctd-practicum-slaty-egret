@@ -1,19 +1,12 @@
-const PasswordInputWithLabel = (props) => {
-
-    const handlePassword = (event) => {
-        props.onChange(event.target.value);
-    }
-
+const PasswordInputWithLabel = ({ value, onChange, labelTextContent }) => {
     return (
         <div>
             <input
                 type="password"
-                value={props.value}
-                placeholder={props.labelTextContent}
-                // onfocus="this.placeholder=''"
-                // onblur="this.placeholder={props.labelTextContent}"
-                onChange={handlePassword} />
-            <label className="visuallyhidden">{props.labelTextContent}</label>
+                value={value}
+                placeholder={labelTextContent}
+                onChange={e => onChange(e.target.value)} />
+            <label className="visuallyhidden">{labelTextContent}</label>
         </div>
     );
 };

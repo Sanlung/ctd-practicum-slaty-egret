@@ -1,20 +1,13 @@
-const EmailInputWithLabel = (props) => {
-
-    const handleEmail = (event) => {
-        props.onChange(event.target.value);
-    };
-
+const EmailInputWithLabel = ({ value, onChange }) => {
     return (
         <div>
             <input
                 type="text"
-                value={props.value}
+                value={value}
                 placeholder="Email"
-                // onfocus="this.placeholder=''"
-                // onblur="this.placeholder={props.labelTextContent}"
-                onChange={handleEmail} />
+                onChange={e => onChange(e.target.value)} />
             <label className="visuallyhidden">Email</label>
-        </div >
+        </div>
     );
 };
 
