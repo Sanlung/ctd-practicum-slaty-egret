@@ -1,25 +1,66 @@
-import NameInputWithLabel from './NameInputWithLabel';
+import { useState } from 'react';
+import {
+    getAuth,
+    createUserWithEmailAndPassword
+} from 'firebase/auth';
+import { firebaseApp } from '../../config/firebaseConfig';
 import EmailInputWithLabel from './EmailInputWithLabel';
 import PasswordInputWithLabel from './PasswordInputWithLabel';
 import SubmitButton from './SubmitButton';
 
-const SignUpForm = () => {
+const SignupForm = () => {
+
+    const auth = getAuth(firebaseApp);
+
+    const [signupEmail, setSignupEmail] = useState('');
+    const [signupPassword, setSignupPassword] = useState('');
+    const [signupPassConf, setSignupPassConf] = useState('');
+    const [signupNotification, setSignupNotification] = useState('');
+
+    const handleEmail = (newValue) => {
+        setSignupEmail(newValue);
+    };
+
+    const handlePassword = (newValue) => {
+        setSignupPassword(newValue);
+    };
+
+    const handlePassConf = (newValue) => {
+        setSignupPassConf(newValue);
+    };
+
+    const handleSignup = (e) => {
+        e.preventDefault();
+        if (signupPassword !== signupPassConf) {
+            setSignupNotification(
+                'Password and password confirmation do not match'
+            )
+            setSignupPassword('');
+            setSignupPassConf('');
+            return null;
+        }
+        createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+            .catch((err) => {
+                console.log(err.code, err.message)
+                setSignupNotification(err.message)
+            });
+    }
 
     return (
         <div>
-            <h1>Create new user</h1>
-            <form>
-                <NameInputWithLabel />
+            <h1>Sign up</h1>
+            <form onSubmit={handleSignup}>
+                <EmailInputWithLabel value={signupEmail} onChange={handleEmail} />
                 <br />
-                <EmailInputWithLabel />
+                <PasswordInputWithLabel value={signupPassword} onChange={handlePassword} labelTextContent='Password' />
                 <br />
-                <PasswordInputWithLabel />
+                <PasswordInputWithLabel value={signupPassConf} onChange={handlePassConf} labelTextContent='Confirm password' />
                 <br />
-                <PasswordInputWithLabel />
+                <SubmitButton buttonTextContent='Sign up' />
                 <br />
-                <SubmitButton />
+                {signupNotification}
             </form>
         </div>
     );
 };
-export default SignUpForm;
+export default SignupForm;

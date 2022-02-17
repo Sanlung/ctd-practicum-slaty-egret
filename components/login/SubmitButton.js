@@ -1,6 +1,6 @@
-const SubmitButton = () => (
+const SubmitButton = (props) => (
     <div>
-        <button type='submit'>Submit</button>
+        <button type='submit'>{props.buttonTextContent}</button>
     </div>
 );
 
