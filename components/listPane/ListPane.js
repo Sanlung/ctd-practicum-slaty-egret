@@ -66,8 +66,8 @@ const ListPane = ({
         <p>Loading ...</p>
       ) : todoList.id === "Welcome" ? (
         <p>
-          Let's get started by creating a new list and add todos to the list or
-          creating other lists.
+          Let&apos;s get started by creating a new list and add todos to the
+          list or creating other lists.
         </p>
       ) : todoList.todos.length !== 0 ? (
         <>
