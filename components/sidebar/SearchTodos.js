@@ -1,23 +1,27 @@
 import {useState} from "react";
 
-const SearchTodos = ({onSearchTodos}) => {
+const SearchTodos = ({isDisabled, onSearchTodos}) => {
   const [title, setTitle] = useState();
 
-  const handleChange = (e) => setTitle(e.target.term.value);
+  const handleTitleChange = (e) => setTitle(e.target.value);
 
   const handleSearch = (e) => {
     e.preventDefault();
     onSearchTodos(title);
     setTitle("");
-  }
+  };
 
   return (
     <form onSubmit={handleSearch}>
-      <button type='submit'>
+      <button type='submit' disabled={isDisabled || !title}>
         &#128269;
-        {/* <FontAwesomeIcon icon={faMagnifier} /> */}
       </button>
-      <input type='text' name='term' value={title} placeholder='Search' onChange={handleChange}/>
+      <input
+        type='text'
+        value={title}
+        placeholder='Search'
+        onChange={handleTitleChange}
+      />
     </form>
   );
 };

@@ -1,12 +1,9 @@
 import {useState} from "react";
 
-const AddTodoForm = ({onAddTodo}) => {
+const AddTodoForm = ({isDisabled, onAddTodo}) => {
   const [title, setTitle] = useState("");
 
-  const handleTitleChange = (e) => {
-    const newTitle = e.target.value;
-    setTitle(newTitle);
-  };
+  const handleTitleChange = (e) => setTitle(e.target.value);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -16,7 +13,7 @@ const AddTodoForm = ({onAddTodo}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <button type='submit' disabled={!title}>
+      <button type='submit' disabled={isDisabled || !title}>
         ✚
       </button>
       <input

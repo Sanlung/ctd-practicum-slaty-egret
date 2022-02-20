@@ -1,13 +1,13 @@
 import TodoListItem from "./TodoListItem";
 
-const TodoList = ({list, searchTerm, onRemoveTodo}) => (
+const TodoList = ({list, isDisabled, onRemoveTodo}) => (
   <>
     <ul>
       {list.map((item) => (
         <TodoListItem
-          key={item.timeStamp}
+          key={String(item.timeStamp)}
           item={item}
-          highlight={item.todo.toLowerCase().includes(searchTerm)}
+          isDisabled={isDisabled}
           onRemoveTodo={onRemoveTodo}
         />
       ))}
