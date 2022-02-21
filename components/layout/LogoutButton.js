@@ -1,11 +1,22 @@
-import Link from "next/link";
+import {
+  getAuth,
+  signOut
+} from "firebase/auth"
+import { firebaseApp } from "../../config/firebaseConfig";
 
-const LogoutButton = () => (
-  <Link href='/'>
-    <a>
-      <button type='button'>Logout</button>
-    </a>
-  </Link>
-);
+const LogoutButton = () => {
+
+  const auth = getAuth(firebaseApp);
+
+  const handleLogout = (e) => {
+    signOut(auth);
+  };
+
+  return (
+    <>
+      <button type='button' onClick={handleLogout}>Logout</button>
+    </>
+  );
+};
 
 export default LogoutButton;
