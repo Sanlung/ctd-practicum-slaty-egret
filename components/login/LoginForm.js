@@ -10,7 +10,7 @@ import SubmitButton from './SubmitButton';
 
 const LoginForm = () => {
 
-    const auth = getAuth(firebaseApp)
+    const auth = getAuth(firebaseApp);
 
     const [loginEmail, setLoginEmail] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
@@ -30,9 +30,6 @@ const LoginForm = () => {
             .catch((err) => {
                 console.log(err.code, err.message)
                 setLoginNotification(err.message)
-                // setTimeout(() => {
-                //     setLoginNotification('')
-                // }, 2000)
             })
         setLoginEmail('')
         setLoginPassword('')
