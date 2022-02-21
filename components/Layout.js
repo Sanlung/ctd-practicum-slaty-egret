@@ -4,7 +4,7 @@ import Footer from "./layout/Footer";
 
 export const siteTitle = "Whatodo App Website";
 
-const Layout = ({children}) => {
+const Layout = ({home, children}) => {
   return (
     <>
       <Head>
@@ -20,7 +20,7 @@ const Layout = ({children}) => {
         />
         <meta name='title' content={siteTitle} />
       </Head>
-      <Header />
+      <Header isHome={home} />
       <main>{children}</main>
       <Footer />
     </>

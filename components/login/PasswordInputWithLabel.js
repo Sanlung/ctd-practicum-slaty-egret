@@ -1,14 +1,21 @@
-const PasswordInputWithLabel = ({ value, onChange, labelTextContent }) => {
-    return (
-        <div>
-            <input
-                type="password"
-                value={value}
-                placeholder={labelTextContent}
-                onChange={e => onChange(e.target.value)} />
-            <label className="visuallyhidden">{labelTextContent}</label>
-        </div>
-    );
+const PasswordInputWithLabel = ({
+  isConfirm,
+  value,
+  onSetPassword,
+  children,
+}) => {
+  return (
+    <div>
+      <label htmlFor='password'>{children}</label>
+      <input
+        type='password'
+        name='passowrd'
+        value={value}
+        placeholder={isConfirm ? "Confirm Passowrd" : "Password"}
+        onChange={(e) => onSetPassword(e.target.value)}
+      />
+    </div>
+  );
 };
 
 export default PasswordInputWithLabel;
