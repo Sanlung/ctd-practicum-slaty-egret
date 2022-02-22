@@ -43,7 +43,7 @@ const SignupForm = () => {
           pathname: "/[user]",
           query: {
             user: user.uid,
-            name: signupEmail.match(/^([^@]*)@/),
+            name: signupEmail.match(/^([^@]*)@/)[1],
           },
         });
       })
@@ -71,7 +71,9 @@ const SignupForm = () => {
         isConfirm
         value={signupPassConf}
         onSetPassword={handleSetPassConf}>
-        &#128273;
+        <i className='fa fa-lock'>
+          &#128273;<span className='visuallyhidden'>Confirm Password</span>
+        </i>
       </PasswordInputWithLabel>
       <SubmitButton>Sign Up</SubmitButton>
       {signupNotification}
