@@ -1,59 +1,43 @@
-import {useState, useEffect, useCallback} from "react";
-import {useRouter} from "next/router";
-import {
-  getFirestore,
-  collection,
-  doc,
-  getDocs,
-  setDoc,
-  deleteDoc,
-} from "firebase/firestore";
+import {getFirestore, doc, setDoc, deleteDoc} from "firebase/firestore";
 import {firebaseApp} from "../../config/firebaseConfig";
 import SearchTodos from "./SearchTodos";
 import TodoListsNav from "./TodoListsNav";
 import AddTodoListForm from "./AddTodoListForm";
 
-const Sidebar = ({userId, listTitle}) => {
-  const router = useRouter();
-  const [todoLists, setTodoLists] = useState([]);
+const Sidebar = ({
+  userId,
+  todoList,
+  todoLists,
+  isDisabled,
+  onFetchData,
+  onSearchTodos,
+  onDisplayList,
+}) => {
   const db = getFirestore(firebaseApp);
-  const colRef = collection(db, userId);
 
-  const fetchUserData = useCallback(async () => {
-    try {
-      const querySnapShot = await getDocs(colRef);
-      const lists = querySnapShot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setTodoLists(lists);
-    } catch (err) {
-      console.error(err.name, err.message);
-    }
-  }, [colRef]);
-
-  useEffect(() => fetchUserData(), [fetchUserData]);
-
-  const handleAddList = async (newTitle) => {
-    for (let list of todoLists) {
-      if (list.id.toLowerCase() === newTitle.toLowerCase()) {
-        alert(`You already have a todo list named ${list.id}. Try again.`);
+  const addTodoList = async (newTitle) => {
+    for (let i = 0; i < todoLists.length; i++) {
+      if (todoLists[i].id.toLowerCase() === newTitle.toLowerCase()) {
+        alert(`You already have a list named '${newTitle}'. Try again.`);
         return;
       }
     }
     try {
       const docRef = doc(db, userId, newTitle);
       await setDoc(docRef, {todos: []});
+      console.log(`'${docRef.id}' added to account '${userId}'`);
+      onFetchData(docRef.id);
     } catch (err) {
       console.error(err.name, err.message);
     }
   };
 
-  const handleRemoveList = async (listName) => {
+  const removeList = async (listName) => {
     try {
       const docRef = doc(db, userId, listName);
       await deleteDoc(docRef);
-      if (listTitle === listName) router.push(`/${userId}`);
+      console.log(`'${docRef.id}' deleted from account '${userId}'`);
+      onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
     }
@@ -62,13 +46,21 @@ const Sidebar = ({userId, listTitle}) => {
   return (
     <aside>
       <h3>Sidebar</h3>
-      <SearchTodos />
-      <TodoListsNav
-        userId={userId}
-        lists={todoLists}
-        onRemoveList={handleRemoveList}
-      />
-      <AddTodoListForm onAddTodoList={handleAddList} />
+      <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
+      {todoLists.length !== 0 ? (
+        <TodoListsNav
+          todoLists={todoLists}
+          onDisplayList={onDisplayList}
+          onRemoveList={removeList}
+        />
+      ) : isDisabled ? (
+        <p>No matching list title.</p>
+      ) : todoList.id === "Login" ? (
+        <p>Loading ...</p>
+      ) : (
+        <p>Create a new todo list.</p>
+      )}
+      <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
     </aside>
   );
 };
