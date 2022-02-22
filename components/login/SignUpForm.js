@@ -71,9 +71,7 @@ const SignupForm = () => {
         isConfirm
         value={signupPassConf}
         onSetPassword={handleSetPassConf}>
-        <i className='fa fa-lock'>
-          &#128273;<span className='visuallyhidden'>Confirm Password</span>
-        </i>
+        &#128273;
       </PasswordInputWithLabel>
       <SubmitButton>Sign Up</SubmitButton>
       {signupNotification}
