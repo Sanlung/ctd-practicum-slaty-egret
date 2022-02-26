@@ -8,6 +8,15 @@ import {
 import firebaseApp from "../../config/firebaseConfig";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
+import style from "../../styles/Logedin.module.css";
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faSortDown, 
+  faSortUp
+);
 
 const ListPane = ({
   userId,
@@ -56,7 +65,7 @@ const ListPane = ({
 
   return (
     <div>
-      <h3>ListPane</h3>
+      {/* <h3>ListPane</h3> */}
       {todoList.id === "Search Result" && (
         <button type='button' onClick={onRestoreLists}>
           ←
@@ -73,9 +82,9 @@ const ListPane = ({
         <>
           <h4>
             {todoList.id}{" "}
-            <button onClick={handleSort}>
-              {todoList.isReverse ? <>⌃</> : <>⌵</>}
-            </button>
+            <span className={style.circle}><button onClick={handleSort}>
+              {todoList.isReverse ? <FontAwesomeIcon icon={faSortUp} />: <FontAwesomeIcon icon={faSortDown} />}
+            </button></span>
           </h4>
           <TodoList
             list={todoList.todos}

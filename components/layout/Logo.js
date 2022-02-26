@@ -4,7 +4,7 @@ import Whatodogrey from "../../public/images/Whatodogrey.svg";
 const Logo = () => {
   return (
     <>
-      <Image src={Whatodogrey} alt='Logos' height='50' width='150' />
+      <Image src={Whatodogrey} alt='Logos' height='40' width='100' />
     </>
   );
 };

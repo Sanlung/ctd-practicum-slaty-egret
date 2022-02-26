@@ -1,4 +1,13 @@
 import {useState} from "react";
+import style from "../../styles/Logedin.module.css";
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus} from "@fortawesome/free-solid-svg-icons";
+
+library.add(
+  faPlus
+);
 
 const AddTodoForm = ({isDisabled, onAddTodo}) => {
   const [title, setTitle] = useState("");
@@ -12,11 +21,11 @@ const AddTodoForm = ({isDisabled, onAddTodo}) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <button type='submit' disabled={isDisabled || !title}>
-        ✚
+    <form className={style.newTaskForm} onSubmit={handleSubmit}>
+      <button className={style.iconAddTodo} type='submit' disabled={isDisabled || !title}>
+      <FontAwesomeIcon icon={faPlus}/>
       </button>
-      <input
+      <input className={style.newTaskInput}
         name='addTodo'
         type='text'
         value={title}

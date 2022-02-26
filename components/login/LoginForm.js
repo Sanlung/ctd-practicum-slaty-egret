@@ -7,6 +7,7 @@ import { firebaseApp } from '../../config/firebaseConfig';
 import EmailInputWithLabel from './EmailInputWithLabel';
 import PasswordInputWithLabel from './PasswordInputWithLabel';
 import SubmitButton from './SubmitButton';
+import style from "../../styles/Home.module.css";
 
 const LoginForm = () => {
 
@@ -39,7 +40,7 @@ const LoginForm = () => {
         <>
             <div>
                 <h1>Log in</h1>
-                <form onSubmit={handleLogin}>
+                <form className={style.login} onSubmit={handleLogin}>
                     <EmailInputWithLabel
                         value={loginEmail}
                         onChange={handleEmail}

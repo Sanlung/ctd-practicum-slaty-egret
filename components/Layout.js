@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
+import style from '../styles/Home.module.css';
 
 export const siteTitle = "Whatodo App Website";
 
@@ -21,7 +22,13 @@ const Layout = ({children}) => {
         <meta name='title' content={siteTitle} />
       </Head>
       <Header />
-      <main>{children}</main>
+      <main>
+      <div>
+        <video autoPlay muted loop className={style.bgvideo}>
+          <source src="/Waves.mp4" type="video/mp4" />
+        </video>
+      </div>
+        {children}</main>
       <Footer />
     </>
   );
