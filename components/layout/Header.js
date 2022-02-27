@@ -1,10 +1,10 @@
 import Logo from "./Logo";
 import LogoutButton from "./LogoutButton";
 
-const Header = () => (
+const Header = ({isHome}) => (
   <header>
     <Logo />
-    <LogoutButton />
+    {!isHome && <LogoutButton />}
   </header>
 );
 

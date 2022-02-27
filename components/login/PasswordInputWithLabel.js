@@ -1,23 +1,24 @@
-import style from "../../styles/Home.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLock } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import styles from "../../styles/Home.module.css";
 
-library.add(
-  faLock
-)
-const PasswordInputWithLabel = ({ value, onChange, labelTextContent }) => {
-    return (
-        <div>
-            <span className={style.icon}><FontAwesomeIcon icon={faLock}/></span>
-            <input className={style.InputWithLabel}
-                type="password"
-                value={value}
-                placeholder={labelTextContent}
-                onChange={e => onChange(e.target.value)} />
-            {/* <label className="visuallyhidden">{labelTextContent}</label> */}
-        </div>
-    );
-};
+const PasswordInputWithLabel = ({
+  isConfirm,
+  value,
+  onSetPassword,
+  children,
+}) => (
+  <div>
+    <label htmlFor='password' className={styles.icon}>
+      {children}
+    </label>
+    <input
+      className={styles.inputWithLabel}
+      type='password'
+      name='passowrd'
+      value={value}
+      placeholder={isConfirm ? "Confirm Passowrd" : "Password"}
+      onChange={(e) => onSetPassword(e.target.value)}
+    />
+  </div>
+);
 
 export default PasswordInputWithLabel;

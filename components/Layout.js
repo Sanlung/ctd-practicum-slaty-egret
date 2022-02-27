@@ -1,11 +1,11 @@
 import Head from "next/head";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import style from '../styles/Home.module.css';
+import styles from "../styles/Home.module.css";
 
 export const siteTitle = "Whatodo App Website";
 
-const Layout = ({children}) => {
+const Layout = ({home, children}) => {
   return (
     <>
       <Head>
@@ -17,18 +17,19 @@ const Layout = ({children}) => {
         />
         <meta
           name='authors'
-          content='Asel Karagazieva, Chung Kao, Ignat Babenko, Tsion Gebregziabher'
+          content='Asel Karagazieva, Chung Kao, Ignat Babenko'
         />
         <meta name='title' content={siteTitle} />
       </Head>
-      <Header />
+      <Header isHome={home} />
       <main>
-      <div>
-        <video autoPlay muted loop className={style.bgvideo}>
-          <source src="/Waves.mp4" type="video/mp4" />
-        </video>
-      </div>
-        {children}</main>
+        <div>
+          <video autoPlay muted loop className={styles.bgvideo}>
+            <source src='/Waves.mp4' type='video/mp4' />
+          </video>
+        </div>
+        {children}
+      </main>
       <Footer />
     </>
   );

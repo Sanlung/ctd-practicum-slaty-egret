@@ -3,14 +3,14 @@ import {useRouter} from "next/router";
 import {useState, useEffect} from "react";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {firebaseApp} from "../config/firebaseConfig";
-import {siteTitle} from "../components/Layout";
+import Layout, {siteTitle} from "../components/Layout";
 import Sidebar from "../components/sidebar/Sidebar";
 import ListPane from "../components/listPane/ListPane";
 import style from "../styles/Logedin.module.css";
 
 const User = () => {
   const router = useRouter();
-  const {user} = router.query;
+  const {user, name} = router.query;
   const [todoLists, setTodoLists] = useState([]);
   const [todoList, setTodoList] = useState({
     id: "Login",
@@ -122,35 +122,35 @@ const User = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Head>
         <title>{siteTitle}</title>
       </Head>
       <div className={style.app}>
         <div className={style.sidebar}>
-
-      <Sidebar
-        userId={user}
-        todoList={todoList}
-        todoLists={todoLists}
-        isDisabled={isUpdateDisabled}
-        onFetchData={fetchUserData}
-        onSearchTodos={searchTodos}
-        onDisplayList={displayList}
-      />
+          <Sidebar
+            userId={user}
+            userName={name}
+            todoList={todoList}
+            todoLists={todoLists}
+            isDisabled={isUpdateDisabled}
+            onFetchData={fetchUserData}
+            onSearchTodos={searchTodos}
+            onDisplayList={displayList}
+          />
         </div>
-       <div className={style.maincontent}>
-      <ListPane
-        userId={user}
-        todoList={todoList}
-        isDisabled={isUpdateDisabled}
-        onFetchData={fetchUserData}
-        onSortTodos={sortTodos}
-        onRestoreLists={restoreLists}
-      />
+        <div className={style.maincontent}>
+          <ListPane
+            userId={user}
+            todoList={todoList}
+            isDisabled={isUpdateDisabled}
+            onFetchData={fetchUserData}
+            onSortTodos={sortTodos}
+            onRestoreLists={restoreLists}
+          />
+        </div>
       </div>
-      </div>
-    </>
+    </Layout>
   );
 };
 

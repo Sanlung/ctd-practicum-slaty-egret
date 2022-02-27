@@ -1,24 +1,19 @@
-import style from "../../styles/Home.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faEnvelopeOpen } from "@fortawesome/free-regular-svg-icons";
+import styles from "../../styles/Home.module.css";
 
-library.add(
-  faEnvelopeOpen
-)
-const EmailInputWithLabel = ({ value, onChange }) => {
-    return (
-        <div>
-        <span className={style.icon}><FontAwesomeIcon icon={faEnvelopeOpen}/></span>
-            <input className={style.InputWithLabel}
-                type="text"
-                value={value}
-                placeholder="Email"
-                onChange={e => onChange(e.target.value)} />
-            <label className="visuallyhidden"></label>
-        </div>
-    );
-};
+const EmailInputWithLabel = ({value, onSetEmail, children}) => (
+  <div>
+    <label htmlFor='email' className={styles.icon}>
+      {children}
+    </label>
+    <inputt
+      className={styles.inputWithLabel}
+      type='email'
+      name='email'
+      value={value}
+      placeholder='Email'
+      onChange={(e) => onSetEmail(e.target.value)}
+    />
+  </div>
+);
 
 export default EmailInputWithLabel;

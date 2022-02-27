@@ -1,7 +1,7 @@
-const SubmitButton = ({ buttonTextContent }) => (
-    <div>
-        <button type='submit'>{buttonTextContent}</button>
-    </div>
+const SubmitButton = ({children}) => (
+  <>
+    <button type='submit'>{children}</button>
+  </>
 );
 
 export default SubmitButton;

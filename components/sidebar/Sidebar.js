@@ -6,6 +6,7 @@ import AddTodoListForm from "./AddTodoListForm";
 
 const Sidebar = ({
   userId,
+  userName,
   todoList,
   todoLists,
   isDisabled,
@@ -45,7 +46,9 @@ const Sidebar = ({
 
   return (
     <aside>
-      {/* <h3>Sidebar</h3> */}
+      <p>
+        <span>👤</span>&nbsp;{userName}
+      </p>
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (
         <TodoListsNav
