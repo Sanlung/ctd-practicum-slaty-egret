@@ -45,6 +45,13 @@
   }
   .circle {
     padding-right: 1.6rem;
+    display: contents;
+    color: rgba(204, 194, 194, 0.904);
+  }
+  .sorticon {
+    padding-right: 1.6rem;
+    display: contents;
+    color: rgba(204, 194, 194, 0.904);
   }
 
 

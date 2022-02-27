@@ -30,6 +30,7 @@
     flex-wrap: wrap;
     top: 5rem;
     font-size: 1.5rem;
+    color: rgba(87, 11, 11, 0.904);
   }
 
   @media(max-width: 700px) {
@@ -87,8 +88,10 @@
   margin-left: 1rem;
 	color: #FFF;
 	font-size: 1.25rem;
-  width: 13rem; 
+  width: 80%; 
   }
   .icon {
     font-size: 1.5rem;
+    color: rgba(204, 194, 194, 0.904);
+    display: contents;
   }

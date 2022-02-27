@@ -82,9 +82,9 @@ const ListPane = ({
         <>
           <h4>
             {todoList.id}{" "}
-            <span className={style.circle}><button onClick={handleSort}>
-              {todoList.isReverse ? <FontAwesomeIcon icon={faSortUp} />: <FontAwesomeIcon icon={faSortDown} />}
-            </button></span>
+            {/* <button onClick={handleSort}>*/}<span className={style.sorticon}>
+              {todoList.isReverse ? <FontAwesomeIcon icon={faSortUp} onClick={handleSort}/>: <FontAwesomeIcon icon={faSortDown} onClick={handleSort}/>}</span>
+            {/* </button> */}
           </h4>
           <TodoList
             list={todoList.todos}
