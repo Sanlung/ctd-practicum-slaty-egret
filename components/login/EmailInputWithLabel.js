@@ -2,7 +2,7 @@ const EmailInputWithLabel = ({ value, onChange }) => {
     return (
         <div>
             <input
-                type="text"
+                type="email"
                 value={value}
                 placeholder="Email"
                 onChange={e => onChange(e.target.value)} />

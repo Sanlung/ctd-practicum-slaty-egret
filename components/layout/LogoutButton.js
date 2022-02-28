@@ -1,16 +1,20 @@
+import { useRouter } from "next/router";
 import {
   getAuth,
   signOut
-} from "firebase/auth"
+} from "firebase/auth";
 import { firebaseApp } from "../../config/firebaseConfig";
 
 const LogoutButton = () => {
-
+  const router = useRouter();
   const auth = getAuth(firebaseApp);
 
   const handleLogout = (e) => {
-    signOut(auth);
-  };
+    signOut(auth)
+      .then(() => {
+        router.push('/')
+      })
+  }
 
   return (
     <>
