@@ -3,8 +3,10 @@ import LogoutButton from "./LogoutButton";
 
 const Header = ({isHome}) => (
   <header>
-    <Logo />
-    {!isHome && <LogoutButton />}
+    <nav>
+      <Logo />
+      {!isHome && <LogoutButton />}
+    </nav>
   </header>
 );
 

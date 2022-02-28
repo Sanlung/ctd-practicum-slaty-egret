@@ -11,4 +11,4 @@ Code the Dream offers free intensive training in software development to people 
 
 ### Contributors
 
-[![Asel Karagazieva](./public/images/Asel_button.svg)](https://github.com/Asel-K) [![Chung Kao](./public/images/Chung_button.svg)](https://github.com/Sanlung) [![Ignat Babenko](./public/images/Ignat_button.svg)](https://github.com/dumpidum) [![Tsion Gebregziabher](./public/images/Tsion_button.svg)](https://github.com/berhetsion1)
+[![Asel Karagazieva](./public/images/Asel_button.svg)](https://github.com/Asel-K) [![Chung Kao](./public/images/Chung_button.svg)](https://github.com/Sanlung) [![Ignat Babenko](./public/images/Ignat_button.svg)](https://github.com/dumpidum)

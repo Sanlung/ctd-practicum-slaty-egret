@@ -6,7 +6,7 @@ import {firebaseApp} from "../config/firebaseConfig";
 import Layout, {siteTitle} from "../components/Layout";
 import Sidebar from "../components/sidebar/Sidebar";
 import ListPane from "../components/listPane/ListPane";
-import style from "../styles/Logedin.module.css";
+import styles from "../styles/Loggedin.module.css";
 
 const User = () => {
   const router = useRouter();
@@ -126,29 +126,25 @@ const User = () => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <div className={style.app}>
-        <div className={style.sidebar}>
-          <Sidebar
-            userId={user}
-            userName={name}
-            todoList={todoList}
-            todoLists={todoLists}
-            isDisabled={isUpdateDisabled}
-            onFetchData={fetchUserData}
-            onSearchTodos={searchTodos}
-            onDisplayList={displayList}
-          />
-        </div>
-        <div className={style.maincontent}>
-          <ListPane
-            userId={user}
-            todoList={todoList}
-            isDisabled={isUpdateDisabled}
-            onFetchData={fetchUserData}
-            onSortTodos={sortTodos}
-            onRestoreLists={restoreLists}
-          />
-        </div>
+      <div className={styles.container}>
+        <Sidebar
+          userId={user}
+          userName={name}
+          todoList={todoList}
+          todoLists={todoLists}
+          isDisabled={isUpdateDisabled}
+          onFetchData={fetchUserData}
+          onSearchTodos={searchTodos}
+          onDisplayList={displayList}
+        />
+        <ListPane
+          userId={user}
+          todoList={todoList}
+          isDisabled={isUpdateDisabled}
+          onFetchData={fetchUserData}
+          onSortTodos={sortTodos}
+          onRestoreLists={restoreLists}
+        />
       </div>
     </Layout>
   );

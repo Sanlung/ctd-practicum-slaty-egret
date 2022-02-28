@@ -12,9 +12,9 @@ import {firebaseApp} from "../../config/firebaseConfig";
 import EmailInputWithLabel from "./EmailInputWithLabel";
 import PasswordInputWithLabel from "./PasswordInputWithLabel";
 import SubmitButton from "./SubmitButton";
-import styles from "../styles/Home.module.css";
+import styles from "../../styles/Home.module.css";
 
-library.add(faLock, faEnvelopeOpen);
+library.add(faLock, faEnvelope);
 
 const SignupForm = () => {
   const router = useRouter();
@@ -67,15 +67,16 @@ const SignupForm = () => {
   };
 
   return (
-    <div className={styles.signUpForm}>
+    <div className={`${styles.form} ${styles.signUpForm}`}>
       <form onSubmit={handleSignUp}>
         <h2>Sign up</h2>
         <EmailInputWithLabel value={signupEmail} onSetEmail={handleSetEmail}>
-          <FontAwesomeIcon icon={faEnvelopeOpen} />
+          <FontAwesomeIcon icon={faEnvelope} />
         </EmailInputWithLabel>
         <PasswordInputWithLabel
+          isConfirm={false}
           value={signupPassword}
-          onSetPassowrd={handleSetPassword}>
+          onSetPassword={handleSetPassword}>
           <FontAwesomeIcon icon={faLock} />
         </PasswordInputWithLabel>
         <PasswordInputWithLabel

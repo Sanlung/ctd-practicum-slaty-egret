@@ -5,18 +5,19 @@ import {
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {
+  faSortDown,
+  faSortUp,
+  faArrowLeft,
+} from "@fortawesome/free-solid-svg-icons";
 import firebaseApp from "../../config/firebaseConfig";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
-import style from "../../styles/Logedin.module.css";
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import styles from "../../styles/Loggedin.module.css";
 
-library.add(
-  faSortDown, 
-  faSortUp
-);
+library.add(faSortDown, faSortUp, faArrowLeft);
 
 const ListPane = ({
   userId,
@@ -64,11 +65,13 @@ const ListPane = ({
   const handleSort = () => onSortTodos();
 
   return (
-    <div>
-      {/* <h3>ListPane</h3> */}
+    <div className={styles.maincontent}>
       {todoList.id === "Search Result" && (
-        <button type='button' onClick={onRestoreLists}>
-          ←
+        <button
+          className={`${styles.iconAddTodo} ${styles.restoreButton}`}
+          type='button'
+          onClick={onRestoreLists}>
+          <FontAwesomeIcon icon={faArrowLeft} /> Next
         </button>
       )}
       {todoList.id === "Login" ? (
@@ -80,12 +83,16 @@ const ListPane = ({
         </p>
       ) : todoList.todos.length !== 0 ? (
         <>
-          <h4>
-            {todoList.id}{" "}
-            {/* <button onClick={handleSort}>*/}<span className={style.sorticon}>
-              {todoList.isReverse ? <FontAwesomeIcon icon={faSortUp} onClick={handleSort}/>: <FontAwesomeIcon icon={faSortDown} onClick={handleSort}/>}</span>
-            {/* </button> */}
-          </h4>
+          <h2>
+            {todoList.id}
+            <span className={styles.spanClickable} onClick={handleSort}>
+              {todoList.isReverse ? (
+                <FontAwesomeIcon icon={faSortUp} />
+              ) : (
+                <FontAwesomeIcon icon={faSortDown} />
+              )}
+            </span>
+          </h2>
           <TodoList
             list={todoList.todos}
             isDisabled={isDisabled}
@@ -94,12 +101,12 @@ const ListPane = ({
         </>
       ) : todoList.id === "Search Result" ? (
         <>
-          <h4>{todoList.id}</h4>
+          <h3>{todoList.id}</h3>
           <p>No matching list item.</p>
         </>
       ) : (
         <>
-          <h4>{todoList.id}</h4>
+          <h3>{todoList.id}</h3>
           <p>Add an item to the list.</p>
         </>
       )}

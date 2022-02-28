@@ -14,7 +14,7 @@ import PasswordInputWithLabel from "./PasswordInputWithLabel";
 import SubmitButton from "./SubmitButton";
 import styles from "../../styles/Home.module.css";
 
-library.add(faLock, faEnvelopeOpen);
+library.add(faLock, faEnvelope);
 
 const LoginForm = () => {
   const router = useRouter();
@@ -55,18 +55,19 @@ const LoginForm = () => {
   };
 
   return (
-    <div className={styles.loginForm}>
-      <form className={styles.login} onSubmit={handleLogin}>
+    <div className={`${styles.form} ${styles.loginForm}`}>
+      <form onSubmit={handleLogin}>
         <h2>Login</h2>
         <EmailInputWithLabel value={loginEmail} onSetEmail={handleSetEmail}>
-          <FontAwesomeIcon icon={faEnvelopeOpen} />
+          <FontAwesomeIcon icon={faEnvelope} />
         </EmailInputWithLabel>
         <PasswordInputWithLabel
           value={loginPassword}
           onSetPassword={handleSetPassword}>
           <FontAwesomeIcon icon={faLock} />
         </PasswordInputWithLabel>
-        <SubmitButton>Login</SubmitButton> {loginNotification}
+        <SubmitButton>Login</SubmitButton>
+        {loginNotification}
       </form>
     </div>
   );

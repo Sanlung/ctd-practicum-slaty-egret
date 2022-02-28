@@ -6,16 +6,17 @@ const PasswordInputWithLabel = ({
   onSetPassword,
   children,
 }) => (
-  <div>
-    <label htmlFor='password' className={styles.icon}>
+  <div className={styles.inputWithLabel}>
+    <label
+      htmlFor={isConfirm ? "passwordConfirm" : "password"}
+      className={styles.icon}>
       {children}
     </label>
     <input
-      className={styles.inputWithLabel}
       type='password'
-      name='passowrd'
+      name={isConfirm ? "passwordConfirm" : "password"}
       value={value}
-      placeholder={isConfirm ? "Confirm Passowrd" : "Password"}
+      placeholder={isConfirm ? "Confirm Password" : "Password"}
       onChange={(e) => onSetPassword(e.target.value)}
     />
   </div>

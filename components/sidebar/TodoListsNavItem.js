@@ -1,14 +1,10 @@
-import { faDeleteLeft, faFontAwesome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import style from "../../styles/Logedin.module.css";
-import { library } from "@fortawesome/fontawesome-svg-core";
-import { faCircle } from "@fortawesome/free-regular-svg-icons";
+import {faDeleteLeft, faFontAwesome} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {faCircle} from "@fortawesome/free-regular-svg-icons";
+import styles from "../../styles/Loggedin.module.css";
 
-library.add(
-  faCircle,
-  faDeleteLeft,
-)
-
+library.add(faCircle, faDeleteLeft);
 
 const TodoListsNavItem = ({
   listName,
@@ -17,15 +13,21 @@ const TodoListsNavItem = ({
   onRemoveList,
 }) => {
   return (
-    <li className={style.menuitem}>
-     <span className={style.circle}> <FontAwesomeIcon icon={faCircle}/></span>
-    <button className={style.iconAddTodo} type='button' onClick={() => onDisplayList(listName)}>
+    <li className={styles.menuitem}>
+      <FontAwesomeIcon icon={faCircle} />
+      <span
+        className={styles.spanClickable}
+        type='button'
+        onClick={() => onDisplayList(listName)}>
         {listName}
-      </button>{" "}
-      <button className={style.iconDelete} type='button' onClick={() => onRemoveList(listName)}>
-        {listCount}
-        <FontAwesomeIcon icon={faDeleteLeft}/>
-      </button>
+      </span>{" "}
+      <span
+        className={`${styles.iconDelete} ${styles.spanClickable}`}
+        type='button'
+        onClick={() => onRemoveList(listName)}>
+        <span className={styles.listCount}>{listCount}</span>
+        <FontAwesomeIcon icon={faDeleteLeft} />
+      </span>
     </li>
   );
 };

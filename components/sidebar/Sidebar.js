@@ -3,6 +3,7 @@ import {firebaseApp} from "../../config/firebaseConfig";
 import SearchTodos from "./SearchTodos";
 import TodoListsNav from "./TodoListsNav";
 import AddTodoListForm from "./AddTodoListForm";
+import styles from "../../styles/Loggedin.module.css";
 
 const Sidebar = ({
   userId,
@@ -45,9 +46,10 @@ const Sidebar = ({
   };
 
   return (
-    <aside>
-      <p>
-        <span>👤</span>&nbsp;{userName}
+    <aside className={styles.sidebar}>
+      <p className={styles.userInfo}>
+        <span>👤</span>
+        <span>{userName}</span>
       </p>
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (
@@ -57,11 +59,11 @@ const Sidebar = ({
           onRemoveList={removeList}
         />
       ) : isDisabled ? (
-        <p>No matching list title.</p>
+        <p className={styles.sidebarMsg}>No matching list title.</p>
       ) : todoList.id === "Login" ? (
-        <p>Loading ...</p>
+        <p className={styles.sidebarMsg}>Loading ...</p>
       ) : (
-        <p>Create a new todo list.</p>
+        <p className={styles.sidebarMsg}>Create a new todo list.</p>
       )}
       <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
     </aside>
