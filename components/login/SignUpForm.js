@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
     getAuth,
     createUserWithEmailAndPassword
@@ -10,6 +11,7 @@ import SubmitButton from './SubmitButton';
 
 const SignupForm = () => {
 
+    const router = useRouter();
     const auth = getAuth(firebaseApp);
 
     const [signupEmail, setSignupEmail] = useState('');
@@ -40,6 +42,10 @@ const SignupForm = () => {
             return null;
         }
         createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+            .then((userCredential) => {
+                console.log(userCredential.user.uid)
+                router.push(`/[${userCredential.user.uid}]`)
+            })
             .catch((err) => {
                 console.log(err.code, err.message)
                 setSignupNotification(err.message)
