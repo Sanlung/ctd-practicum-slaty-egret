@@ -21,7 +21,7 @@
     width: 60%;
     height: 100%;
     position: relative;
-    margin: 6% auto;
+    margin: 10% auto;
     padding: 5px;
     background-color: rgba(93, 158, 158, 0.09);
     backdrop-filter: blur(0.4rem);
@@ -30,7 +30,7 @@
     flex-wrap: wrap;
     top: 5rem;
     font-size: 1.5rem;
-    color: rgba(87, 11, 11, 0.904);
+    color: rgba(204, 194, 194, 0.904)
   }
 
   @media(max-width: 700px) {
@@ -61,7 +61,7 @@
   border-radius: 1rem;
 	margin-right: 1rem;
   margin-left: 1rem;
-	color: #FFF;
+	color: rgba(204, 194, 194, 0.904);
 	font-size: 1.25rem;
   width: 13rem; 
   }
@@ -74,7 +74,7 @@
   border-radius: 1rem;
 	margin-right: 1rem;
   margin-left: 1rem;
-	color: #FFF;
+	color: rgba(204, 194, 194, 0.904);
 	font-size: 1.25rem;
   width: 13rem; 
   }

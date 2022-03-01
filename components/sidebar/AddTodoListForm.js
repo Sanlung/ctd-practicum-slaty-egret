@@ -20,8 +20,8 @@ const AddTodoListForm = ({isDisabled, onAddTodoList}) => {
 
   return (
     <form className={style.newListForm} onSubmit={handleSubmit}>
-      <button className={style.iconAddTodo} type='submit' disabled={isDisabled || !title}>
-      <span className={style.circle}><FontAwesomeIcon icon={faPlus}/></span>
+      <button className={style.btn} type='submit' disabled={isDisabled || !title}>
+      <span className={style.iconSpan}><FontAwesomeIcon icon={faPlus}/></span>
       </button>
       <input className={style.newListInput}
         name='addList'

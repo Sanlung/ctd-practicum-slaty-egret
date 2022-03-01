@@ -22,7 +22,7 @@ const AddTodoForm = ({isDisabled, onAddTodo}) => {
 
   return (
     <form className={style.newTaskForm} onSubmit={handleSubmit}>
-      <button className={style.iconAddTodo} type='submit' disabled={isDisabled || !title}>
+      <button className={style.btn} type='submit' disabled={isDisabled || !title}>
       <FontAwesomeIcon icon={faPlus}/>
       </button>
       <input className={style.newTaskInput}

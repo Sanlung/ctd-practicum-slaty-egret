@@ -19,9 +19,9 @@ const SearchTodos = ({isDisabled, onSearchTodos}) => {
   };
 
   return (
-    <form className={style.searchTodo} onSubmit={handleSearch}>
-      <button className={style.iconAddTodo} type='submit' disabled={isDisabled || !title}> 
-      <span className={style.circle}><FontAwesomeIcon icon={faSearch}/></span>
+    <form className={style.searchTodoForm} onSubmit={handleSearch}>
+      <button className={style.btn} type='submit' disabled={isDisabled || !title}> 
+      <span className={style.iconSpan}><FontAwesomeIcon icon={faSearch}/></span>
        </button> 
       <input className={style.search}
         type='text'

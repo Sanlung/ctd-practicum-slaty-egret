@@ -9,7 +9,13 @@ import PasswordInputWithLabel from './PasswordInputWithLabel';
 import SubmitButton from './SubmitButton';
 import style from "../../styles/Home.module.css";
 
+import { useRouter } from 'next/router';
+
 const LoginForm = () => {
+
+
+    const router=useRouter();
+
 
     const auth = getAuth(firebaseApp);
 
@@ -28,6 +34,12 @@ const LoginForm = () => {
     const handleLogin = (e) => {
         e.preventDefault();
         signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+
+        .then((userCredential) => {
+            router.push(`/[${userCredential.user.uid}]`)
+            console.log(userCredential.user.uid)
+        })
+
             .catch((err) => {
                 console.log(err.code, err.message)
                 setLoginNotification(err.message)

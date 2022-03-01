@@ -18,8 +18,8 @@ const TodoListsNavItem = ({
 }) => {
   return (
     <li className={style.menuitem}>
-     <span className={style.circle}> <FontAwesomeIcon icon={faCircle}/></span>
-    <button className={style.iconAddTodo} type='button' onClick={() => onDisplayList(listName)}>
+     <span className={style.iconSpan}> <FontAwesomeIcon icon={faCircle}/></span>
+    <button className={style.btn} type='button' onClick={() => onDisplayList(listName)}>
         {listName}
       </button>{" "}
       <button className={style.iconDelete} type='button' onClick={() => onRemoveList(listName)}>
