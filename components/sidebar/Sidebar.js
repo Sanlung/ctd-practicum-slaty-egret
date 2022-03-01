@@ -1,4 +1,6 @@
 import {getFirestore, doc, setDoc, deleteDoc} from "firebase/firestore";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 import {firebaseApp} from "../../config/firebaseConfig";
 import SearchTodos from "./SearchTodos";
 import TodoListsNav from "./TodoListsNav";
@@ -48,7 +50,9 @@ const Sidebar = ({
   return (
     <aside className={styles.sidebar}>
       <p className={styles.userInfo}>
-        <span>👤</span>
+        <span>
+          <FontAwesomeIcon icon={faCircleUser} />
+        </span>
         <span>{userName}</span>
       </p>
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />

@@ -1,10 +1,8 @@
 import {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
-import {library} from "@fortawesome/fontawesome-svg-core";
 import style from "../../styles/Loggedin.module.css";
 
-library.add(faSearch);
 const SearchTodos = ({isDisabled, onSearchTodos}) => {
   const [title, setTitle] = useState();
 

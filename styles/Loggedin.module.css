@@ -18,6 +18,7 @@
 .sidebar {
   width: 100%;
   padding: 2rem;
+  border-radius: 1rem;
   display: flex;
   flex-flow: column;
   margin-bottom: 2rem;
@@ -26,11 +27,11 @@
 }
 
 .userInfo {
-  font-weight: 700;
   padding: 1.3rem 2rem;
 }
 
 .userInfo span:first-child {
+  font-size: 1.8rem;
   display: inline-block;
   margin-right: 1.5rem;
 }
@@ -80,7 +81,7 @@
   padding: 1.3em;
   align-items: center;
   justify-content: flex-start;
-  transition: all 0.2s linear;
+  transition: all 0.2s ease;
 }
 
 .spanClickable {
@@ -112,8 +113,8 @@
   padding: 0 2rem 0 1rem;
 }
 
-.sidebar .menuitem:hover,
-.sidebar .menuitem.is-active {
+.menuitem:hover,
+.menuitem.is-active {
   color: #3bba9c;
   border-right: 0.3rem solid #3bba9c;
   border-left: 1px solid #fff;

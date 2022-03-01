@@ -108,14 +108,14 @@ main {
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  padding: 10rem 0;
+  padding: 10rem 0 15rem 0;
 }
 
-Footer {
+footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   color: antiquewhite;
   display: flex;
   flex-flow: column nowrap;
@@ -123,6 +123,36 @@ Footer {
   background-color: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur (0.5rem);
   box-shadow: 0 1.25rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.avatarLinks {
+  width: 25rem;
+  list-style: none;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.avatarLinks > li {
+  display: inline-block;
+  width: 5rem;
+  transition: transform 0.2s ease;
+}
+
+.avatarLinks > li:first-child {
+  font-size: 5rem;
+  line-height: 1;
+}
+
+.avatarLinks > li:hover {
+  transform: translateY(-0.3rem);
+}
+
+.avatarLinks > li:active {
+  transform: translate(-0.1rem, 0.3rem);
+}
+
+.avatarLink {
+  border-radius: 50%;
 }
 
 button {
@@ -137,7 +167,7 @@ button {
   font-family: var(--ff-secondary);
   background-color: rgba(0, 0, 0, 0.15);
   backdrop-filter: blur(00.4rem);
-  transition: transform 0.1s ease;
+  transition: transform 0.2s ease;
 }
 
 button:hover {

@@ -7,14 +7,11 @@ import {
   faEnvelope,
   faEnvelopeOpen,
 } from "@fortawesome/free-solid-svg-icons";
-import {library} from "@fortawesome/fontawesome-svg-core";
 import {firebaseApp} from "../../config/firebaseConfig";
 import EmailInputWithLabel from "./EmailInputWithLabel";
 import PasswordInputWithLabel from "./PasswordInputWithLabel";
 import SubmitButton from "./SubmitButton";
 import styles from "../../styles/Home.module.css";
-
-library.add(faLock, faEnvelope);
 
 const SignupForm = () => {
   const router = useRouter();

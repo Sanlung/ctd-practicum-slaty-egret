@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import AppBackground from "./layout/AppBackground";
+import Background from "./layout/Background";
 
 export const siteTitle = "Whatodo App Website";
 
@@ -23,7 +23,7 @@ const Layout = ({home, children}) => {
       </Head>
       <Header isHome={home} />
       <main>
-        <AppBackground />
+        <Background />
         {children}
       </main>
       <Footer />

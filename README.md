@@ -1,6 +1,6 @@
 <p align="center"><img src="./public/images/ctd-logo.jpeg" /></p>
 <h2 align="center">Whatodo App</h2>
-<h4 align="center">A Todo App Built on Next.js</h4>
+<h5 align="center">A Todo App Built on Next.js with Firebase</h5>
 <p align="center">Project by the CTD Practicum - Slaty Egret team</p>
 
 ## Overview
@@ -11,4 +11,4 @@ Code the Dream offers free intensive training in software development to people 
 
 ### Contributors
 
-[![Asel Karagazieva](./public/images/Asel_button.svg)](https://github.com/Asel-K) [![Chung Kao](./public/images/Chung_button.svg)](https://github.com/Sanlung) [![Ignat Babenko](./public/images/Ignat_button.svg)](https://github.com/dumpidum)
+[![Asel Karagazieva](./public/images/AselButton.svg)](https://github.com/Asel-K) [![Chung Kao](./public/images/ChungButton.svg)](https://github.com/Sanlung) [![Ignat Babenko](./public/images/IgnatButton.svg)](https://github.com/dumpidum)
