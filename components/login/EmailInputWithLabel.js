@@ -12,7 +12,6 @@ const EmailInputWithLabel = ({ value, onChange }) => {
         <div>
         <span className={style.icon}><FontAwesomeIcon icon={faEnvelopeOpen}/></span>
             <input className={style.InputWithLabel}
-                // type="text"
                 type="email"
                 value={value}
                 placeholder="Email"
