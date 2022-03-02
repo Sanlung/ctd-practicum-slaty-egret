@@ -18,19 +18,15 @@ const SignupForm = () => {
     const [signupPassword, setSignupPassword] = useState('');
     const [signupPassConf, setSignupPassConf] = useState('');
     const [signupNotification, setSignupNotification] = useState('');
-
     const handleEmail = (newValue) => {
         setSignupEmail(newValue);
     };
-
     const handlePassword = (newValue) => {
         setSignupPassword(newValue);
     };
-
     const handlePassConf = (newValue) => {
         setSignupPassConf(newValue);
     };
-
     const handleSignup = (e) => {
         e.preventDefault();
         if (signupPassword !== signupPassConf) {

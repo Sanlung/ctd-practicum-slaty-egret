@@ -6,6 +6,7 @@ import {firebaseApp} from "../config/firebaseConfig";
 import {siteTitle} from "../components/Layout";
 import Sidebar from "../components/sidebar/Sidebar";
 import ListPane from "../components/listPane/ListPane";
+import style from "../styles/Logedin.module.css";
 
 const User = () => {
   const router = useRouter();
@@ -125,6 +126,9 @@ const User = () => {
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <div className={style.app}>
+        <div className={style.sidebar}>
+
       <Sidebar
         userId={user}
         todoList={todoList}
@@ -134,6 +138,8 @@ const User = () => {
         onSearchTodos={searchTodos}
         onDisplayList={displayList}
       />
+        </div>
+       <div className={style.maincontent}>
       <ListPane
         userId={user}
         todoList={todoList}
@@ -142,6 +148,8 @@ const User = () => {
         onSortTodos={sortTodos}
         onRestoreLists={restoreLists}
       />
+      </div>
+      </div>
     </>
   );
 };

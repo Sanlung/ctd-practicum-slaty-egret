@@ -45,7 +45,7 @@ const Sidebar = ({
 
   return (
     <aside>
-      <h3>Sidebar</h3>
+      {/* <h3>Sidebar</h3> */}
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (
         <TodoListsNav

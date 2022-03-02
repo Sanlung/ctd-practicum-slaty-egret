@@ -4,7 +4,8 @@ import { siteTitle } from "../components/Layout";
 import { firebaseApp } from "../config/firebaseConfig";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import LoginForm from "../components/login/LoginForm";
-import SignUpForm from "../components/login/SignUpForm";
+import SignupForm from "../components/login/SignupForm";
+import styles from "../styles/Home.module.css";
 
 const Home = () => {
 
@@ -21,6 +22,7 @@ const Home = () => {
       <SignUpForm />
     </>
   );
+
 };
 
 export default Home;
