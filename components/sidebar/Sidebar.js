@@ -67,7 +67,7 @@ const Sidebar = ({
       ) : todoList.id === "Login" ? (
         <div className={styles.sidebarMsg}>Loading ...</div>
       ) : (
-        <div className={styles.sidebarMsg}>Create a new todo list.</div>
+        <div className={styles.sidebarMsg}>Create a new todo list here.</div>
       )}
       <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
     </aside>

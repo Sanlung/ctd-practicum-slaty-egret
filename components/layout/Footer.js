@@ -1,9 +1,9 @@
 import Image from "next/image";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import AselProfile from "../../public/images/AselProfile.png";
-import ChungProfile from "../../public/images/ChungProfile.jpeg";
-import IgnatProfile from "../../public/images/IgnatProfile.png";
+import AselProfile from "../../public/images/asel-profile.png";
+import ChungProfile from "../../public/images/chung-profile.jpeg";
+import IgnatProfile from "../../public/images/ignat-profile.png";
 
 const Footer = () => (
   <footer>

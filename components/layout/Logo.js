@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Whatodogrey from "../../public/images/Whatodogrey.svg";
+import Whatodogrey from "../../public/images/whatodo-grey.svg";
 
 const Logo = () => {
   return (

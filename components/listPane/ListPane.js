@@ -77,10 +77,13 @@ const ListPane = ({
       {todoList.id === "Login" ? (
         <p>Loading ...</p>
       ) : todoList.id === "Welcome" ? (
-        <p>
-          Let&apos;s get started by creating a new list and add todos to the
-          list or creating other lists.
-        </p>
+        <>
+          <h2>{todoList.id}</h2>
+          <p>
+            Let&apos;s get started by creating a new list and add todos to the
+            list or creating other lists.
+          </p>
+        </>
       ) : todoList.todos.length !== 0 ? (
         <>
           <h2>
@@ -101,12 +104,12 @@ const ListPane = ({
         </>
       ) : todoList.id === "Search Result" ? (
         <>
-          <h3>{todoList.id}</h3>
+          <h2>{todoList.id}</h2>
           <p>No matching list item.</p>
         </>
       ) : (
         <>
-          <h3>{todoList.id}</h3>
+          <h2>{todoList.id}</h2>
           <p>Add an item to the list.</p>
         </>
       )}

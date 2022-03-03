@@ -3,13 +3,13 @@ import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import Background from "./layout/Background";
 
-export const siteTitle = "Whatodo App Website";
+export const siteTitle = "Whatodo App";
 
 const Layout = ({home, children}) => {
   return (
     <>
       <Head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta
           name='description'
