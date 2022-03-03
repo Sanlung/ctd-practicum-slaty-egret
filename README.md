@@ -11,7 +11,7 @@
 
 Code the Dream offers free intensive training in software development to people from diverse low-income backgrounds. Its Practicum curriculum offers opportunities for the Code the Dream School trainees to work collaboratively in dev teams on real-life, deployable software engineering projects.
 
-### About
+## About
 
 This project is the work by team Slaty Egret of the Code the Dream Spring 2022 Practicum to develop a todo app bootstrapped with [Create Next App](https://create-next-app.js.org/) using [Firebase](https://firebase.google.com/) Authentocation and Cloud Firestore. The app is deployed on Firebase for personal use by the team members and as the final exercise of the project.
 
@@ -53,15 +53,15 @@ $ npm run dev
 
 And you have the app in port `localhost:3000`.
 
-<p><img width="300" src="./public/images/project-pic2.png" alt="Whatodo App login page"/></p>
+<p><img width="400" src="./public/images/project-pic2.png" alt="Whatodo App login page"/></p>
 
 Sign up with an email and set your password, and enjoy your own todo app.
 
-<p><img width="300" src="./public/images/project-pic1.png" alt="Whatodo App logged in page"/> <img width="89" src="./public/images/project-pic3.png" alt="Whatodo App logged in page - mobile"/> <img width="89" src="./public/images/project-pic4.png" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
+<p><img width="400" src="./public/images/project-pic1.png" alt="Whatodo App logged in page"/> <img width="120" src="./public/images/project-pic3.png" alt="Whatodo App logged in page - mobile"/> <img width="120" src="./public/images/project-pic4.png" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
 
 You can sort a list chronologically, and may search items in the lists or list names for a certain keyword.
 
-<p><img width="300" src="./public/images/project-pic5.png" alt="Whatodo App search interface"/></p>
+<p><img width="400" src="./public/images/project-pic5.png" alt="Whatodo App search interface"/></p>
 
 Please let us know of any bugs or imperfections. Your input will be greatly appreciated. It has been a wonderful learning experience for us.
 
