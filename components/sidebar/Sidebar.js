@@ -63,11 +63,11 @@ const Sidebar = ({
           onRemoveList={removeList}
         />
       ) : isDisabled ? (
-        <p className={styles.sidebarMsg}>No matching list title.</p>
+        <div className={styles.sidebarMsg}>No matching list title.</div>
       ) : todoList.id === "Login" ? (
-        <p className={styles.sidebarMsg}>Loading ...</p>
+        <div className={styles.sidebarMsg}>Loading ...</div>
       ) : (
-        <p className={styles.sidebarMsg}>Create a new todo list.</p>
+        <div className={styles.sidebarMsg}>Create a new todo list.</div>
       )}
       <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
     </aside>

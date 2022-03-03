@@ -3,12 +3,10 @@
 .container {
   width: 90%;
   max-width: 112.5rem;
-  min-height: 60vh;
+  min-height: 70vh;
   margin: 0 auto;
-  padding: 5rem;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
+  padding: 5rem 2rem;
+  border-radius: 1rem;
   color: rgba(204, 194, 194, 0.904);
   background-color: rgba(93, 158, 158, 0.09);
   backdrop-filter: blur(0.4rem);
@@ -16,24 +14,36 @@
 }
 
 .sidebar {
-  width: 100%;
-  padding: 2rem;
+  width: 6rem;
+  height: 65vh;
+  padding: 2rem 0;
   border-radius: 1rem;
   display: flex;
   flex-flow: column;
-  margin-bottom: 2rem;
+  overflow: hidden;
+  position: fixed;
+  margin-right: auto;
+  z-index: 3;
   background: rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 6px rgba(225, 225, 225, 0.2);
+  transition: width 0.2s linear;
+  backface-visibility: hidden;
+}
+
+.sidebar:hover {
+  width: 35rem;
+  background: rgb(46, 45, 45);
 }
 
 .userInfo {
   padding: 1.3rem 2rem;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 .userInfo span:first-child {
   font-size: 1.8rem;
-  display: inline-block;
-  margin-right: 1.5rem;
+  margin-right: 3.5rem;
 }
 
 .searchTodo,
@@ -41,6 +51,12 @@
   display: flex;
   padding: 1.3rem;
   align-items: center;
+}
+
+.searchTodo button,
+.menuitem *:first-child,
+.newListForm button {
+  margin-right: 1.5rem;
 }
 
 .newListForm {
@@ -55,8 +71,9 @@
 }
 
 .iconAddTodo:hover {
-  background-color: transparent;
   box-shadow: none;
+  background-color: transparent;
+  color: rgb(228, 213, 213);
 }
 
 .search,
@@ -92,25 +109,22 @@
 }
 
 .spanClickable:hover {
-  color: rgb(219, 197, 197);
-  transform: translateY(-2px) scale(1.2);
+  color: rgb(228, 213, 213);
 }
 
 .spanClickable:active {
-  transform: translate(-1px, 2px) scale(1);
-}
-
-.iconDelete {
-  margin-left: auto;
-}
-
-.iconDelete > *:last-child {
-  font-size: 1.8rem;
+  transform: translate(-1px, 2px);
 }
 
 .listCount {
-  display: inline-box;
-  padding: 0 2rem 0 1rem;
+  padding-right: 1rem;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.iconDelete {
+  font-size: 1.8rem;
+  margin-left: auto;
 }
 
 .menuitem:hover,
@@ -123,17 +137,25 @@
 
 .sidebarMsg {
   padding: 1.3rem 2rem;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .maincontent {
-  width: 100%;
-  min-height: 50vh;
+  min-height: 65vh;
+  margin-left: 7rem;
+  width: calc(100%-7rem);
   padding: 2rem;
   display: flex;
   flex-flow: column;
+  border-radius: 1rem;
   background-color: rgba(93, 158, 158, 0.09);
   backdrop-filter: blur(0.4rem);
   box-shadow: 0 0 6px rgba(225, 225, 225, 0.5);
+}
+
+.maincontent .spanClickable:hover {
+  transform: translatey(-0.2rem) scale(1.1);
 }
 
 .restoreButton {
@@ -161,7 +183,7 @@
 }
 
 .removeButton:hover {
-  transform: translateY(-2.5px);
+  transform: translateY(-2.5px) scale(1.1);
 }
 
 .removeButton:active {
@@ -189,27 +211,40 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+/* Media Query for Md/Lg Screen */
+
 @media only screen and (min-width: 37.5em) {
   .container {
-    width: 80%;
+    padding: 5rem;
   }
 }
 
-@media only screen and (min-width: 50em) {
+@media only screen and (min-width: 62.5em) {
   .container {
-    width: 70%;
-  }
-}
-
-@media only screen and (min-width: 56.25em) {
-  .container {
-    width: 90%;
-    min-height: 80vh;
-    flex-flow: row;
-    align-items: stretch;
+    display: flex;
   }
   .sidebar {
-    margin: 0 2rem 0 0;
-    width: 40%;
+    width: 35%;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .sidebar:hover {
+    width: 35%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .maincontent {
+    flex-grow: 1;
+    margin-left: 2rem;
+  }
+  .userInfo span:first-child {
+    margin-right: 1.5rem;
+  }
+
+  .searchTodo button,
+  .menuitem *:first-child,
+  .newListForm button {
+    margin-right: 0;
   }
 }

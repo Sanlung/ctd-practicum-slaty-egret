@@ -21,11 +21,11 @@ const TodoListsNavItem = ({
         onClick={() => onDisplayList(listName)}>
         {listName}
       </span>{" "}
+      <span className={styles.listCount}>{listCount}</span>
       <span
         className={`${styles.iconDelete} ${styles.spanClickable}`}
         type='button'
         onClick={() => onRemoveList(listName)}>
-        <span className={styles.listCount}>{listCount}</span>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </span>
     </li>
