@@ -1,11 +1,15 @@
 import {getFirestore, doc, setDoc, deleteDoc} from "firebase/firestore";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCircleUser} from "@fortawesome/free-solid-svg-icons";
 import {firebaseApp} from "../../config/firebaseConfig";
 import SearchTodos from "./SearchTodos";
 import TodoListsNav from "./TodoListsNav";
 import AddTodoListForm from "./AddTodoListForm";
+import styles from "../../styles/Loggedin.module.css";
 
 const Sidebar = ({
   userId,
+  userName,
   todoList,
   todoLists,
   isDisabled,
@@ -44,8 +48,13 @@ const Sidebar = ({
   };
 
   return (
-    <aside>
-      {/* <h3>Sidebar</h3> */}
+    <aside className={styles.sidebar}>
+      <p className={styles.userInfo}>
+        <span>
+          <FontAwesomeIcon icon={faCircleUser} />
+        </span>
+        <span>{userName}</span>
+      </p>
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (
         <TodoListsNav
@@ -54,11 +63,11 @@ const Sidebar = ({
           onRemoveList={removeList}
         />
       ) : isDisabled ? (
-        <p>No matching list title.</p>
+        <div className={styles.sidebarMsg}>No matching list title.</div>
       ) : todoList.id === "Login" ? (
-        <p>Loading ...</p>
+        <div className={styles.sidebarMsg}>Loading ...</div>
       ) : (
-        <p>Create a new todo list.</p>
+        <div className={styles.sidebarMsg}>Create a new todo list here.</div>
       )}
       <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
     </aside>

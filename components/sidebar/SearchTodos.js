@@ -1,12 +1,8 @@
 import {useState} from "react";
-import style from "../../styles/Logedin.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { library } from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import style from "../../styles/Loggedin.module.css";
 
-library.add(
-  faSearch
-)
 const SearchTodos = ({isDisabled, onSearchTodos}) => {
   const [title, setTitle] = useState();
 
@@ -19,11 +15,15 @@ const SearchTodos = ({isDisabled, onSearchTodos}) => {
   };
 
   return (
-    <form className={style.searchTodoForm} onSubmit={handleSearch}>
-      <button className={style.btn} type='submit' disabled={isDisabled || !title}> 
-      <span className={style.iconSpan}><FontAwesomeIcon icon={faSearch}/></span>
-       </button> 
-      <input className={style.search}
+    <form className={style.searchTodo} onSubmit={handleSearch}>
+      <button
+        className={style.iconAddTodo}
+        type='submit'
+        disabled={isDisabled || !title}>
+        <FontAwesomeIcon icon={faSearch} />
+      </button>
+      <input
+        className={style.search}
         type='text'
         value={title}
         placeholder='Search'

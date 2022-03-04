@@ -1,28 +1,19 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { siteTitle } from "../components/Layout";
-import { firebaseApp } from "../config/firebaseConfig";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Layout, {siteTitle} from "../components/Layout";
 import LoginForm from "../components/login/LoginForm";
 import SignupForm from "../components/login/SignupForm";
 import styles from "../styles/Home.module.css";
 
-const Home = () => {
-
-  const router = useRouter();
-  const auth = getAuth(firebaseApp);
-
-
-  return (
-    <>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+const Home = () => (
+  <Layout home>
+    <Head>
+      <title>{siteTitle}</title>
+    </Head>
+    <div className={styles.container}>
       <LoginForm />
-      <SignUpForm />
-    </>
-  );
-
-};
+      <SignupForm />
+    </div>
+  </Layout>
+);
 
 export default Home;

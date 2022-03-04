@@ -1,71 +1,73 @@
-import { useState } from 'react';
-import { useRouter } from 'next/router';
+import {useRouter} from "next/router";
+import {useState} from "react";
+import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
-    getAuth,
-    signInWithEmailAndPassword
-} from 'firebase/auth';
-import { firebaseApp } from '../../config/firebaseConfig';
-import EmailInputWithLabel from './EmailInputWithLabel';
-import PasswordInputWithLabel from './PasswordInputWithLabel';
-import SubmitButton from './SubmitButton';
-import style from "../../styles/Home.module.css";
-
-import { useRouter } from 'next/router';
+  faLock,
+  faEnvelope,
+  faEnvelopeOpen,
+} from "@fortawesome/free-solid-svg-icons";
+import {firebaseApp} from "../../config/firebaseConfig";
+import EmailInputWithLabel from "./EmailInputWithLabel";
+import PasswordInputWithLabel from "./PasswordInputWithLabel";
+import SubmitButton from "./SubmitButton";
+import styles from "../../styles/Home.module.css";
 
 const LoginForm = () => {
-    const router = useRouter();
-    const auth = getAuth(firebaseApp);
+  const router = useRouter();
+  const auth = getAuth(firebaseApp);
 
-    const [loginEmail, setLoginEmail] = useState('');
-    const [loginPassword, setLoginPassword] = useState('');
-    const [loginNotification, setLoginNotification] = useState('');
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
+  const [loginNotification, setLoginNotification] = useState("");
 
-    const handleEmail = (newValue) => {
-        setLoginEmail(newValue);
-    };
+  const handleSetEmail = (newValue) => {
+    setLoginEmail(newValue);
+  };
 
-    const handlePassword = (newValue) => {
-        setLoginPassword(newValue);
-    };
+  const handleSetPassword = (newValue) => {
+    setLoginPassword(newValue);
+  };
 
-    const handleLogin = (e) => {
-        e.preventDefault();
-        signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-            .then((userCredential) => {
-                router.push(`/[${userCredential.user.uid}]`)
-                console.log(userCredential.user.uid)
-            })
-            .catch((err) => {
-                console.log(err.code, err.message)
-                setLoginNotification(err.message)
-            })
-        setLoginEmail('')
-        setLoginPassword('')
-    }
+  const handleLogin = (e) => {
+    e.preventDefault();
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(`The user '${user.uid}' has signed in.`);
+        router.push({
+          pathname: "/[user]",
+          query: {
+            user: user.uid,
+            name: loginEmail.match(/^([^@]*)@/)[1],
+          },
+        });
+      })
+      .catch((err) => {
+        console.log(err.code, err.message);
+        setLoginNotification(err.message);
+      });
+    setLoginEmail("");
+    setLoginPassword("");
+  };
 
-    return (
-        <>
-            <div>
-                <h1>Log in</h1>
-                <form className={style.login} onSubmit={handleLogin}>
-                    <EmailInputWithLabel
-                        value={loginEmail}
-                        onChange={handleEmail}
-                    />
-                    <br />
-                    <PasswordInputWithLabel
-                        value={loginPassword}
-                        onChange={handlePassword}
-                        labelTextContent='Password'
-                    />
-                    <br />
-                    <SubmitButton buttonTextContent='Log in' />
-                    <br />
-                    {loginNotification}
-                </form>
-            </div>
-        </>
-    );
+  return (
+    <div className={`${styles.form} ${styles.loginForm}`}>
+      <form onSubmit={handleLogin}>
+        <h2>Login</h2>
+        <EmailInputWithLabel value={loginEmail} onSetEmail={handleSetEmail}>
+          <FontAwesomeIcon icon={faEnvelope} />
+        </EmailInputWithLabel>
+        <PasswordInputWithLabel
+          value={loginPassword}
+          onSetPassword={handleSetPassword}>
+          <FontAwesomeIcon icon={faLock} />
+        </PasswordInputWithLabel>
+        <SubmitButton>Login</SubmitButton>
+        {loginNotification}
+      </form>
+    </div>
+  );
 };
 
 export default LoginForm;

@@ -1,15 +1,15 @@
 import Head from "next/head";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
-import style from '../styles/Home.module.css';
+import Background from "./layout/Background";
 
-export const siteTitle = "Whatodo App Website";
+export const siteTitle = "Whatodo App";
 
-const Layout = ({children}) => {
+const Layout = ({home, children}) => {
   return (
     <>
       <Head>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon.png' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
         <meta
           name='description'
@@ -17,18 +17,15 @@ const Layout = ({children}) => {
         />
         <meta
           name='authors'
-          content='Asel Karagazieva, Chung Kao, Ignat Babenko, Tsion Gebregziabher'
+          content='Asel Karagazieva, Chung Kao, Ignat Babenko'
         />
         <meta name='title' content={siteTitle} />
       </Head>
-      <Header />
+      <Header isHome={home} />
       <main>
-      <div>
-        <video autoPlay muted loop className={style.bgvideo}>
-          <source src="/Waves.mp4" type="video/mp4" />
-        </video>
-      </div>
-        {children}</main>
+        <Background />
+        {children}
+      </main>
       <Footer />
     </>
   );

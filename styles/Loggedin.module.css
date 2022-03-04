@@ -1,0 +1,250 @@
+/* Logged In Page Styles */
+
+.container {
+  width: 90%;
+  max-width: 112.5rem;
+  min-height: 70vh;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+  border-radius: 1rem;
+  color: rgba(204, 194, 194, 0.904);
+  background-color: rgba(93, 158, 158, 0.09);
+  backdrop-filter: blur(0.4rem);
+  box-shadow: 0 0 6px rgba(225, 225, 225, 0.5);
+}
+
+.sidebar {
+  width: 6rem;
+  height: 65vh;
+  padding: 2rem 0;
+  border-radius: 1rem;
+  display: flex;
+  flex-flow: column;
+  overflow: hidden;
+  position: fixed;
+  margin-right: auto;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 6px rgba(225, 225, 225, 0.2);
+  transition: width 0.2s linear;
+  backface-visibility: hidden;
+}
+
+.sidebar:hover {
+  width: 35rem;
+  background: rgb(46, 45, 45);
+}
+
+.userInfo {
+  padding: 1.3rem 2rem;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.userInfo span:first-child {
+  font-size: 1.8rem;
+  margin-right: 3.5rem;
+}
+
+.searchTodo,
+.newListForm {
+  display: flex;
+  padding: 1.3rem;
+  align-items: center;
+}
+
+.searchTodo button,
+.menuitem *:first-child,
+.newListForm button {
+  margin-right: 1.5rem;
+}
+
+.newListForm {
+  margin-top: auto;
+}
+
+.iconAddTodo {
+  font-size: 1.8rem;
+  margin: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.iconAddTodo:hover {
+  box-shadow: none;
+  background-color: transparent;
+  color: rgb(228, 213, 213);
+}
+
+.search,
+.newListInput {
+  font-size: 1.5rem;
+  color: inherit;
+  padding: 0.7rem;
+  margin-left: 1rem;
+  flex-grow: 1;
+  border-radius: 1rem;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.search::placeholder,
+.newListInput::placeholder,
+.newTaskInput::placeholder {
+  color: rgba(225, 225, 225, 0.5);
+}
+
+.menuitem {
+  display: flex;
+  padding: 1.3em;
+  align-items: center;
+  justify-content: flex-start;
+  transition: all 0.2s ease;
+}
+
+.spanClickable {
+  margin-left: 2rem;
+  cursor: pointer;
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.spanClickable:hover {
+  color: rgb(228, 213, 213);
+}
+
+.spanClickable:active {
+  transform: translate(-1px, 2px);
+}
+
+.listCount {
+  padding-right: 1rem;
+  flex-grow: 1;
+  text-align: right;
+}
+
+.iconDelete {
+  font-size: 1.8rem;
+  margin-left: auto;
+}
+
+.menuitem:hover,
+.menuitem.is-active {
+  color: #3bba9c;
+  border-right: 0.3rem solid #3bba9c;
+  border-left: 1px solid #fff;
+  box-shadow: 0 0 4px rgba(225, 225, 225, 0.5);
+}
+
+.sidebarMsg {
+  padding: 1.3rem 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.maincontent {
+  min-height: 65vh;
+  margin-left: 7rem;
+  width: calc(100%-7rem);
+  padding: 2rem;
+  display: flex;
+  flex-flow: column;
+  border-radius: 1rem;
+  background-color: rgba(93, 158, 158, 0.09);
+  backdrop-filter: blur(0.4rem);
+  box-shadow: 0 0 6px rgba(225, 225, 225, 0.5);
+}
+
+.maincontent .spanClickable:hover {
+  transform: translatey(-0.2rem) scale(1.1);
+}
+
+.restoreButton {
+  align-self: baseline;
+}
+
+.todoListItem {
+  color: black;
+  display: flex;
+  justify-content: flex-start;
+  border-radius: 1rem;
+  align-items: center;
+  margin: 2rem 1.3rem;
+  padding: 0.7rem;
+  background-color: rgba(204, 194, 194, 0.904);
+}
+
+.todoListItem > *:last-child {
+  margin-left: auto;
+}
+
+.removeButton {
+  cursor: pointer;
+  transition: transform 0.1s ease;
+}
+
+.removeButton:hover {
+  transform: translateY(-2.5px) scale(1.1);
+}
+
+.removeButton:active {
+  transform: translate(-1.5px, 2.5px);
+}
+
+.newTaskForm {
+  color: inherit;
+  padding: 1.3rem;
+  width: 100%;
+  margin-top: auto;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.newTaskInput {
+  font-size: 1.5rem;
+  padding: 0.7rem;
+  flex-grow: 1;
+  border-radius: 1rem;
+  margin-left: 1rem;
+  color: rgba(204, 194, 194, 0.904);
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+/* Media Query for Md/Lg Screen */
+
+@media only screen and (min-width: 37.5em) {
+  .container {
+    padding: 5rem;
+  }
+}
+
+@media only screen and (min-width: 62.5em) {
+  .container {
+    display: flex;
+  }
+  .sidebar {
+    width: 35%;
+    padding: 2rem;
+    position: relative;
+  }
+
+  .sidebar:hover {
+    width: 35%;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .maincontent {
+    flex-grow: 1;
+    margin-left: 2rem;
+  }
+  .userInfo span:first-child {
+    margin-right: 1.5rem;
+  }
+
+  .searchTodo button,
+  .menuitem *:first-child,
+  .newListForm button {
+    margin-right: 0;
+  }
+}

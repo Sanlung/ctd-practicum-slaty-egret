@@ -1,13 +1,10 @@
 import {useState} from "react";
-import style from "../../styles/Logedin.module.css";
-import { library } from '@fortawesome/fontawesome-svg-core';
+import {library} from "@fortawesome/fontawesome-svg-core";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus} from "@fortawesome/free-solid-svg-icons";
+import styles from "../../styles/Loggedin.module.css";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus} from "@fortawesome/free-solid-svg-icons";
-
-library.add(
-  faPlus
-);
+library.add(faPlus);
 
 const AddTodoForm = ({isDisabled, onAddTodo}) => {
   const [title, setTitle] = useState("");
@@ -21,11 +18,15 @@ const AddTodoForm = ({isDisabled, onAddTodo}) => {
   };
 
   return (
-    <form className={style.newTaskForm} onSubmit={handleSubmit}>
-      <button className={style.btn} type='submit' disabled={isDisabled || !title}>
-      <FontAwesomeIcon icon={faPlus}/>
+    <form className={styles.newTaskForm} onSubmit={handleSubmit}>
+      <button
+        className={styles.iconAddTodo}
+        type='submit'
+        disabled={isDisabled || !title}>
+        <FontAwesomeIcon icon={faPlus} />
       </button>
-      <input className={style.newTaskInput}
+      <input
+        className={styles.newTaskInput}
         name='addTodo'
         type='text'
         value={title}

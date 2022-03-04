@@ -1,11 +1,11 @@
 import Image from "next/image";
-import Whatodogrey from "../../public/images/Whatodogrey.svg";
+import Whatodogrey from "../../public/images/whatodo-grey.svg";
 
 const Logo = () => {
   return (
-    <>
-      <Image src={Whatodogrey} alt='Logos' height='40' width='100' />
-    </>
+    <div className='logo'>
+      <Image src={Whatodogrey} alt='Logo' height='50' width='120' />
+    </div>
   );
 };
 
