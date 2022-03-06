@@ -26,7 +26,7 @@
   z-index: 3;
   background: rgba(0, 0, 0, 0.2);
   box-shadow: 0 0 6px rgba(225, 225, 225, 0.2);
-  transition: width 0.2s linear;
+  transition: all 0.2s linear;
   backface-visibility: hidden;
 }
 
@@ -99,6 +99,11 @@
   align-items: center;
   justify-content: flex-start;
   transition: all 0.2s ease;
+}
+
+.menuitem > * {
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .spanClickable {

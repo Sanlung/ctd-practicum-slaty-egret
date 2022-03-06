@@ -29,7 +29,7 @@ or
 $ git clone git@github.com:Sanlung/ctd-practicum-slaty-egret.git
 ```
 
-Once you cloned the repo, in your local project directory run:
+Once you have cloned the repo, in your local project directory run:
 
 ```
 $ npm install

@@ -5,7 +5,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faLock,
   faEnvelope,
-  faEnvelopeOpen,
+  faRotate,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import {firebaseApp} from "../../config/firebaseConfig";
 import EmailInputWithLabel from "./EmailInputWithLabel";
@@ -19,6 +20,7 @@ const LoginForm = () => {
 
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+  const [isError, setIsError] = useState(false);
   const [loginNotification, setLoginNotification] = useState("");
 
   const handleSetEmail = (newValue) => {
@@ -34,7 +36,11 @@ const LoginForm = () => {
     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`The user '${user.uid}' has signed in.`);
+        // console.log(`The user '${user.uid}' has signed in.`);
+        setIsError(false);
+        setLoginEmail("");
+        setLoginNotification("Logging in ...");
+        setTimeout(() => setLoginNotification(""), 2000);
         router.push({
           pathname: "/[user]",
           query: {
@@ -44,10 +50,11 @@ const LoginForm = () => {
         });
       })
       .catch((err) => {
-        console.log(err.code, err.message);
+        // console.log(err.code, err.message);
+        setIsError(true);
         setLoginNotification(err.message);
+        setTimeout(() => setLoginNotification(""), 3000);
       });
-    setLoginEmail("");
     setLoginPassword("");
   };
 
@@ -64,7 +71,22 @@ const LoginForm = () => {
           <FontAwesomeIcon icon={faLock} />
         </PasswordInputWithLabel>
         <SubmitButton>Login</SubmitButton>
-        {loginNotification}
+        <p className={loginNotification ? styles.notify : styles.hidden}>
+          {!loginNotification ? (
+            <span>
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+            </span>
+          ) : isError ? (
+            <span>
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={faRotate} />
+            </span>
+          )}
+          {loginNotification}
+        </p>
       </form>
     </div>
   );

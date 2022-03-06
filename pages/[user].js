@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {useRouter} from "next/router";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useRef} from "react";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {firebaseApp} from "../config/firebaseConfig";
 import Layout, {siteTitle} from "../components/Layout";
@@ -8,10 +8,22 @@ import Sidebar from "../components/sidebar/Sidebar";
 import ListPane from "../components/listPane/ListPane";
 import styles from "../styles/Loggedin.module.css";
 
+const useSessionState = (key, initialState) => {
+  const [value, setValue] = useState(initialState);
+  useEffect(() => {
+    sessionStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
+  return [value, setValue];
+};
+
 const User = () => {
   const router = useRouter();
   const {user, name} = router.query;
-  const [todoLists, setTodoLists] = useState([]);
+  const [userInfo, setUserInfo] = useSessionState("userInfo", {
+    id: user,
+    name: name,
+  });
+  const [todoLists, setTodoLists] = useSessionState([]);
   const [todoList, setTodoList] = useState({
     id: "Login",
     todos: [],
@@ -21,7 +33,7 @@ const User = () => {
   const [restoredList, setRestoredList] = useState({});
   const [isUpdateDisabled, setIsUpdateDisabled] = useState(false);
   const db = getFirestore(firebaseApp);
-  const colRef = collection(db, user);
+  const colRef = collection(db, userInfo.id);
 
   const fetchUserData = async (newTitle) => {
     try {
@@ -128,8 +140,8 @@ const User = () => {
       </Head>
       <div className={styles.container}>
         <Sidebar
-          userId={user}
-          userName={name}
+          userId={userInfo.id}
+          userName={userInfo.name}
           todoList={todoList}
           todoLists={todoLists}
           isDisabled={isUpdateDisabled}
@@ -138,7 +150,7 @@ const User = () => {
           onDisplayList={displayList}
         />
         <ListPane
-          userId={user}
+          userId={userInfo.id}
           todoList={todoList}
           isDisabled={isUpdateDisabled}
           onFetchData={fetchUserData}
