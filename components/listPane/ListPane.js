@@ -43,7 +43,7 @@ const ListPane = ({
       await updateDoc(docRef, {
         todos: arrayUnion({timeStamp: Date.now(), todo: newTodo}),
       });
-      console.log(`'${newTodo}' added to the '${docRef.id}' list.`);
+      // console.log(`'${newTodo}' added to the '${docRef.id}' list.`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
@@ -55,7 +55,7 @@ const ListPane = ({
       await updateDoc(docRef, {
         todos: arrayRemove(item),
       });
-      console.log(`'${item.todo}' removed from the '${docRef.id}' list.`);
+      // console.log(`'${item.todo}' removed from the '${docRef.id}' list.`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);

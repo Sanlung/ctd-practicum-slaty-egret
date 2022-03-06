@@ -1,6 +1,11 @@
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faLock,
@@ -46,20 +51,26 @@ const SignupForm = () => {
       setSignupPassConf("");
       return null;
     }
-    createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // console.log(`The user '${user.uid}' has signed up.`);
-        setIsError(false);
-        setSignupEmail("");
-        setSignupNotification("Signed up, logging in ...");
-        setTimeout(() => setSignupNotification(""), 2000);
-        router.push({
-          pathname: "/[user]",
-          query: {
-            user: user.uid,
-            name: signupEmail.match(/^([^@]*)@/)[1],
-          },
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return createUserWithEmailAndPassword(
+          auth,
+          signupEmail,
+          signupPassword
+        ).then((userCredential) => {
+          const user = userCredential.user;
+          // console.log(`The user '${user.uid}' has signed up.`);
+          setIsError(false);
+          setSignupEmail("");
+          setSignupNotification("Signed up, logging in ...");
+          setTimeout(() => setSignupNotification(""), 2000);
+          router.push({
+            pathname: "/[user]",
+            query: {
+              user: user.uid,
+              name: signupEmail.match(/^([^@]*)@/)[1],
+            },
+          });
         });
       })
       .catch((err) => {

@@ -1,6 +1,11 @@
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faLock,
@@ -17,7 +22,6 @@ import styles from "../../styles/Home.module.css";
 const LoginForm = () => {
   const router = useRouter();
   const auth = getAuth(firebaseApp);
-
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [isError, setIsError] = useState(false);
@@ -33,21 +37,25 @@ const LoginForm = () => {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        // console.log(`The user '${user.uid}' has signed in.`);
-        setIsError(false);
-        setLoginEmail("");
-        setLoginNotification("Logging in ...");
-        setTimeout(() => setLoginNotification(""), 2000);
-        router.push({
-          pathname: "/[user]",
-          query: {
-            user: user.uid,
-            name: loginEmail.match(/^([^@]*)@/)[1],
-          },
-        });
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, loginEmail, loginPassword).then(
+          (userCredential) => {
+            const user = userCredential.user;
+            // console.log(`The user '${user.uid}' has signed in.`);
+            setIsError(false);
+            setLoginEmail("");
+            setLoginNotification("Logging in ...");
+            setTimeout(() => setLoginNotification(""), 2000);
+            router.push({
+              pathname: "/[user]",
+              query: {
+                user: user.uid,
+                name: loginEmail.match(/^([^@]*)@/)[1],
+              },
+            });
+          }
+        );
       })
       .catch((err) => {
         // console.log(err.code, err.message);
