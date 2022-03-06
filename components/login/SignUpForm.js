@@ -1,11 +1,17 @@
 import {useRouter} from "next/router";
 import {useState} from "react";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  setPersistence,
+  browserSessionPersistence,
+} from "firebase/auth";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faLock,
   faEnvelope,
-  faEnvelopeOpen,
+  faRotate,
+  faExclamationTriangle,
 } from "@fortawesome/free-solid-svg-icons";
 import {firebaseApp} from "../../config/firebaseConfig";
 import EmailInputWithLabel from "./EmailInputWithLabel";
@@ -20,6 +26,7 @@ const SignupForm = () => {
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPassConf, setSignupPassConf] = useState("");
+  const [isError, setIsError] = useState(false);
   const [signupNotification, setSignupNotification] = useState("");
 
   const handleSetEmail = (newValue) => {
@@ -37,28 +44,41 @@ const SignupForm = () => {
   const handleSignUp = (e) => {
     e.preventDefault();
     if (signupPassword !== signupPassConf) {
-      setSignupNotification("Password and password confirmation do not match!");
+      setIsError(true);
+      setSignupNotification("Passwords do not match!");
+      setTimeout(() => setSignupNotification(""), 3000);
       setSignupPassword("");
       setSignupPassConf("");
       return null;
     }
-    createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        console.log(`The user '${user.uid}' has signed up.`);
-        router.push({
-          pathname: "/[user]",
-          query: {
-            user: user.uid,
-            name: signupEmail.match(/^([^@]*)@/)[1],
-          },
+    setPersistence(auth, browserSessionPersistence)
+      .then(() => {
+        return createUserWithEmailAndPassword(
+          auth,
+          signupEmail,
+          signupPassword
+        ).then((userCredential) => {
+          const user = userCredential.user;
+          // console.log(`The user '${user.uid}' has signed up.`);
+          setIsError(false);
+          setSignupEmail("");
+          setSignupNotification("Signed up, logging in ...");
+          setTimeout(() => setSignupNotification(""), 2000);
+          router.push({
+            pathname: "/[user]",
+            query: {
+              user: user.uid,
+              name: signupEmail.match(/^([^@]*)@/)[1],
+            },
+          });
         });
       })
       .catch((err) => {
-        console.log(err.code, err.message);
+        // console.log(err.code, err.message);
+        setIsError(true);
         setSignupNotification(err.message);
+        setTimeout(() => setSignupNotification(""), 3000);
       });
-    setSignupEmail("");
     setSignupPassword("");
     setSignupPassConf("");
   };
@@ -83,7 +103,22 @@ const SignupForm = () => {
           <FontAwesomeIcon icon={faLock} />
         </PasswordInputWithLabel>
         <SubmitButton>Sign Up</SubmitButton>
-        {signupNotification}
+        <p className={signupNotification ? styles.notify : styles.hidden}>
+          {!signupNotification ? (
+            <span>
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+            </span>
+          ) : isError ? (
+            <span>
+              <FontAwesomeIcon icon={faExclamationTriangle} />
+            </span>
+          ) : (
+            <span>
+              <FontAwesomeIcon icon={faRotate} />
+            </span>
+          )}
+          {signupNotification}
+        </p>
       </form>
     </div>
   );

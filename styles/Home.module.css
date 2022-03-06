@@ -20,7 +20,7 @@
   border-radius: 1rem;
 }
 
-.form h2 {
+.form > form > *:not(:last-child) {
   margin-bottom: 2rem;
 }
 
@@ -36,7 +36,6 @@
 }
 
 .inputWithLabel {
-  margin-bottom: 2rem;
   display: flex;
   align-items: center;
 }
@@ -51,10 +50,19 @@
   background-color: rgba(0, 0, 0, 0.15);
 }
 
-.icon {
+.icon,
+.notify,
+.hidden {
   font-size: 1.8rem;
-  color: rgba(204, 194, 194, 0.904);
-  display: contents;
+}
+
+.notify > span {
+  display: inline-block;
+  margin-right: 2rem;
+}
+
+.hidden {
+  visibility: hidden;
 }
 
 @media only screen and (min-width: 37.5em) {

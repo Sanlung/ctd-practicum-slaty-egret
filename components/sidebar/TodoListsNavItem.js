@@ -17,14 +17,12 @@ const TodoListsNavItem = ({
       <FontAwesomeIcon icon={faCircle} />
       <span
         className={styles.spanClickable}
-        type='button'
         onClick={() => onDisplayList(listName)}>
         {listName}
       </span>{" "}
       <span className={styles.listCount}>{listCount}</span>
       <span
         className={`${styles.iconDelete} ${styles.spanClickable}`}
-        type='button'
         onClick={() => onRemoveList(listName)}>
         <FontAwesomeIcon icon={faDeleteLeft} />
       </span>

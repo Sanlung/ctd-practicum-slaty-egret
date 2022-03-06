@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {useRouter} from "next/router";
-import {useState, useEffect} from "react";
+import {useState, useEffect, useCallback} from "react";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {firebaseApp} from "../config/firebaseConfig";
 import Layout, {siteTitle} from "../components/Layout";

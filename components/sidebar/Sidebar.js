@@ -29,7 +29,7 @@ const Sidebar = ({
     try {
       const docRef = doc(db, userId, newTitle);
       await setDoc(docRef, {todos: []});
-      console.log(`'${docRef.id}' added to account '${userId}'`);
+      // console.log(`'${docRef.id}' added to account '${userId}'`);
       onFetchData(docRef.id);
     } catch (err) {
       console.error(err.name, err.message);
@@ -40,7 +40,7 @@ const Sidebar = ({
     try {
       const docRef = doc(db, userId, listName);
       await deleteDoc(docRef);
-      console.log(`'${docRef.id}' deleted from account '${userId}'`);
+      // console.log(`'${docRef.id}' deleted from account '${userId}'`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
