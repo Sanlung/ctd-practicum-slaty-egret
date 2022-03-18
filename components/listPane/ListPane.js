@@ -5,22 +5,19 @@ import {
   arrayUnion,
   arrayRemove,
 } from "firebase/firestore";
-import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
   faSortDown,
   faSortUp,
   faArrowLeft,
 } from "@fortawesome/free-solid-svg-icons";
-import firebaseApp from "../../config/firebaseConfig";
+import {firebaseApp} from "../../config/firebaseConfig";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import styles from "../../styles/Loggedin.module.css";
 
-library.add(faSortDown, faSortUp, faArrowLeft);
-
 const ListPane = ({
-  userId,
+  user,
   todoList,
   isDisabled,
   onFetchData,
@@ -28,7 +25,6 @@ const ListPane = ({
   onRestoreLists,
 }) => {
   const db = getFirestore(firebaseApp);
-  const docRef = doc(db, userId, todoList.id);
 
   const addTodo = async (newTodo) => {
     for (let i = 0; i < todoList.todos.length; i++) {
@@ -40,10 +36,11 @@ const ListPane = ({
       }
     }
     try {
+      const docRef = doc(db, user.uid, todoList.id);
       await updateDoc(docRef, {
         todos: arrayUnion({timeStamp: Date.now(), todo: newTodo}),
       });
-      // console.log(`'${newTodo}' added to the '${docRef.id}' list.`);
+      console.log(`'${newTodo}' added to the '${docRef.id}' list.`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
@@ -52,10 +49,11 @@ const ListPane = ({
 
   const removeTodo = async (item) => {
     try {
+      const docRef = doc(db, user.uid, todoList.id);
       await updateDoc(docRef, {
         todos: arrayRemove(item),
       });
-      // console.log(`'${item.todo}' removed from the '${docRef.id}' list.`);
+      console.log(`'${item.todo}' removed from the '${docRef.id}' list.`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
