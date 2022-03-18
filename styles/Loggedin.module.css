@@ -3,10 +3,10 @@
 .container {
   width: 90%;
   max-width: 112.5rem;
-  min-height: 70vh;
   margin: 0 auto;
   padding: 5rem 2rem;
   border-radius: 1rem;
+  position: relative;
   color: rgba(204, 194, 194, 0.904);
   background-color: rgba(93, 158, 158, 0.09);
   backdrop-filter: blur(0.4rem);
@@ -15,7 +15,8 @@
 
 .sidebar {
   width: 6rem;
-  height: 65vh;
+  min-height: 65vh;
+  height: calc(100% - 10rem);
   padding: 2rem 0;
   border-radius: 1rem;
   display: flex;
@@ -148,6 +149,7 @@
 
 .maincontent {
   min-height: 65vh;
+  height: calc(100% - 10rem);
   margin-left: 7rem;
   width: calc(100%-7rem);
   padding: 2rem;
@@ -228,6 +230,7 @@
   .container {
     display: flex;
   }
+
   .sidebar {
     width: 35%;
     padding: 2rem;
@@ -243,6 +246,7 @@
     flex-grow: 1;
     margin-left: 2rem;
   }
+
   .userInfo span:first-child {
     margin-right: 1.5rem;
   }
