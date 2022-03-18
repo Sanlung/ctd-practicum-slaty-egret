@@ -53,15 +53,15 @@ $ npm run dev
 
 And you have the app in port `localhost:3000`.
 
-<p><img width="450" src="./public/images/project-pic2.svg" alt="Whatodo App login page"/></p>
+<p><img width="550" src="./public/images/project-pic2.svg" alt="Whatodo App login page"/></p>
 
 Sign up with an email and set your password, and enjoy your own todo app.
 
-<p><img width="450" src="./public/images/project-pic1.svg" alt="Whatodo App logged in page"/> <img width="134" src="./public/images/project-pic3.svg" alt="Whatodo App logged in page - mobile"/> <img width="134" src="./public/images/project-pic4.svg" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
+<p><img width="480" src="./public/images/project-pic1.svg" alt="Whatodo App logged in page"/> <img width="115" src="./public/images/project-pic3.svg" alt="Whatodo App logged in page - mobile"/> <img width="115" src="./public/images/project-pic4.svg" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
 
 You can sort a list chronologically, and may search items in the lists or list names for a certain keyword.
 
-<p><img width="450" src="./public/images/project-pic5.svg" alt="Whatodo App search interface"/></p>
+<p><img width="550" src="./public/images/project-pic5.svg" alt="Whatodo App search interface"/></p>
 
 Please let us know of any bugs or imperfections. Your input will be greatly appreciated. It has been a wonderful learning experience for us.
 

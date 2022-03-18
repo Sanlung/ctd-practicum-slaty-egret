@@ -79,7 +79,7 @@ header {
   top: 0;
   z-index: 5;
   width: 100%;
-  padding: 1rem;
+  padding: 2rem;
   display: flex;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.6);
@@ -108,14 +108,16 @@ main {
   justify-content: center;
   width: 100%;
   min-height: 100vh;
-  padding: 10rem 0 15rem 0;
+  margin-bottom: -3rem;
+  padding: 10rem 0 13rem 0;
 }
 
 footer {
   position: absolute;
   bottom: 0;
   width: 100%;
-  padding: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
   color: antiquewhite;
   display: flex;
   flex-flow: column nowrap;
