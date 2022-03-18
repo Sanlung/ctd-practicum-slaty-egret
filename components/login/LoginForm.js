@@ -1,5 +1,5 @@
-import {useRouter} from "next/router";
 import {useState} from "react";
+import {useRouter} from "next/router";
 import {
   getAuth,
   signInWithEmailAndPassword,
@@ -38,27 +38,23 @@ const LoginForm = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setPersistence(auth, browserSessionPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(auth, loginEmail, loginPassword).then(
-          (userCredential) => {
-            const user = userCredential.user;
-            // console.log(`The user '${user.uid}' has signed in.`);
-            setIsError(false);
-            setLoginEmail("");
-            setLoginNotification("Logging in ...");
-            setTimeout(() => setLoginNotification(""), 2000);
-            router.push({
-              pathname: "/[user]",
-              query: {
-                user: user.uid,
-                name: loginEmail.match(/^([^@]*)@/)[1],
-              },
-            });
-          }
-        );
+      .then(() => signInWithEmailAndPassword(auth, loginEmail, loginPassword))
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(`The user '${user.uid}' has signed in.`);
+        setIsError(false);
+        setLoginEmail("");
+        setLoginNotification("Logging in ...");
+        setTimeout(() => setLoginNotification(""), 2000);
+        router.push({
+          pathname: "/users/[user]",
+          query: {
+            user: user.email.match(/^([^@]*)@/)[1],
+          },
+        });
       })
       .catch((err) => {
-        // console.log(err.code, err.message);
+        console.log(err.code, err.message);
         setIsError(true);
         setLoginNotification(err.message);
         setTimeout(() => setLoginNotification(""), 3000);

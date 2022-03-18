@@ -8,8 +8,7 @@ import AddTodoListForm from "./AddTodoListForm";
 import styles from "../../styles/Loggedin.module.css";
 
 const Sidebar = ({
-  userId,
-  userName,
+  user,
   todoList,
   todoLists,
   isDisabled,
@@ -27,9 +26,9 @@ const Sidebar = ({
       }
     }
     try {
-      const docRef = doc(db, userId, newTitle);
+      const docRef = doc(db, user.uid, newTitle);
       await setDoc(docRef, {todos: []});
-      // console.log(`'${docRef.id}' added to account '${userId}'`);
+      console.log(`'${docRef.id}' added to account '${user.uid}'`);
       onFetchData(docRef.id);
     } catch (err) {
       console.error(err.name, err.message);
@@ -38,9 +37,9 @@ const Sidebar = ({
 
   const removeList = async (listName) => {
     try {
-      const docRef = doc(db, userId, listName);
+      const docRef = doc(db, user.uid, listName);
       await deleteDoc(docRef);
-      // console.log(`'${docRef.id}' deleted from account '${userId}'`);
+      console.log(`'${docRef.id}' deleted from account '${user.uid}'`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
@@ -53,7 +52,7 @@ const Sidebar = ({
         <span>
           <FontAwesomeIcon icon={faCircleUser} />
         </span>
-        <span>{userName}</span>
+        <span>{user ? user.email.match(/^([^@]*)@/)[1] : " "}</span>
       </p>
       <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (

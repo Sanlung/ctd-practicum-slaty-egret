@@ -1,16 +1,14 @@
 import Head from "next/head";
-import {useRouter} from "next/router";
 import {useState, useEffect, useCallback} from "react";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
-import {firebaseApp} from "../config/firebaseConfig";
-import Layout, {siteTitle} from "../components/Layout";
-import Sidebar from "../components/sidebar/Sidebar";
-import ListPane from "../components/listPane/ListPane";
-import styles from "../styles/Loggedin.module.css";
+import {firebaseApp} from "../../config/firebaseConfig";
+import {useAuth} from "../../context/AuthUserContext";
+import Layout, {siteTitle} from "../../components/Layout";
+import Sidebar from "../../components/sidebar/Sidebar";
+import ListPane from "../../components/listPane/ListPane";
+import styles from "../../styles/Loggedin.module.css";
 
 const User = () => {
-  const router = useRouter();
-  const {user, name} = router.query;
   const [todoLists, setTodoLists] = useState([]);
   const [todoList, setTodoList] = useState({
     id: "Login",
@@ -21,54 +19,58 @@ const User = () => {
   const [restoredList, setRestoredList] = useState({});
   const [isUpdateDisabled, setIsUpdateDisabled] = useState(false);
   const db = getFirestore(firebaseApp);
-  const colRef = collection(db, user);
+  const {authUser} = useAuth();
 
-  const fetchUserData = async (newTitle) => {
-    try {
-      const querySnapshot = await getDocs(colRef);
-      // console.log(querySnapshot);
-      if (!querySnapshot.docs.length) {
-        setTodoLists([]);
-        setTodoList({
-          id: "Welcome",
-          todos: [],
-          isReverse: false,
-        });
-      } else {
-        const lists = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setTodoLists(lists);
-        if (newTitle) {
-          setTodoList({
-            id: newTitle,
-            todos: [],
-            isReverse: false,
-          });
-        } else {
-          const listStatus = lists.filter((el) => el.id === todoList.id);
-          listStatus.length
-            ? setTodoList({
-                id: listStatus[0].id,
-                todos: listStatus[0].todos,
-                isReverse: false,
-              })
-            : setTodoList({
-                id: lists[0].id,
-                todos: lists[0].todos,
+  const fetchUserData = useCallback(
+    async (newTitle) => {
+      if (authUser) {
+        try {
+          const querySnapshot = await getDocs(collection(db, authUser.uid));
+          if (!querySnapshot.docs.length) {
+            setTodoLists([]);
+            setTodoList({
+              id: "Welcome",
+              todos: [],
+              isReverse: false,
+            });
+          } else {
+            const lists = querySnapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+            }));
+            setTodoLists(lists);
+            if (newTitle) {
+              setTodoList({
+                id: newTitle,
+                todos: [],
                 isReverse: false,
               });
+            } else {
+              const listStatus = lists.filter((el) => el.id === todoList.id);
+              listStatus.length
+                ? setTodoList({
+                    id: listStatus[0].id,
+                    todos: listStatus[0].todos,
+                    isReverse: false,
+                  })
+                : setTodoList({
+                    id: lists[0].id,
+                    todos: lists[0].todos,
+                    isReverse: false,
+                  });
+            }
+          }
+        } catch (err) {
+          console.error(err.name, err.message);
         }
       }
-    } catch (err) {
-      console.error(err.name, err.message);
-    }
-  };
+    },
+    [authUser]
+  );
 
   useEffect(() => {
     fetchUserData();
-  }, []);
+  }, [fetchUserData]);
 
   const displayList = (listName) => {
     for (let list of todoLists) {
@@ -128,8 +130,7 @@ const User = () => {
       </Head>
       <div className={styles.container}>
         <Sidebar
-          userId={user}
-          userName={name}
+          user={authUser}
           todoList={todoList}
           todoLists={todoLists}
           isDisabled={isUpdateDisabled}
@@ -138,7 +139,7 @@ const User = () => {
           onDisplayList={displayList}
         />
         <ListPane
-          userId={user}
+          user={authUser}
           todoList={todoList}
           isDisabled={isUpdateDisabled}
           onFetchData={fetchUserData}

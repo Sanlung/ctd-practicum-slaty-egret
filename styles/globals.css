@@ -71,7 +71,7 @@ body {
   top: 0;
   left: 0;
   z-index: -5;
-  filter: brightness(50%);
+  filter: brightness(30%);
 }
 
 header {

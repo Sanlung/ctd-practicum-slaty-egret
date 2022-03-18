@@ -1,16 +1,17 @@
-import {getAuth, signOut} from "firebase/auth";
 import {useRouter} from "next/router";
+import {getAuth, signOut} from "firebase/auth";
 import {firebaseApp} from "../../config/firebaseConfig";
+import {useAuth} from "../../context/AuthUserContext";
 
 const LogoutButton = () => {
   const router = useRouter();
   const auth = getAuth(firebaseApp);
-  const user = auth.currentUser;
+  const {authUser} = useAuth();
 
   const handleLogout = (e) => {
     signOut(auth)
       .then(() => {
-        // console.log(`The user '${user.uid}' has signed out.`);
+        console.log(`The user '${authUser.uid}' has signed out.`);
         router.push("/");
       })
       .catch((err) => {

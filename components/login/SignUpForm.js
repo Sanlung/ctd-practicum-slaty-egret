@@ -1,5 +1,5 @@
-import {useRouter} from "next/router";
 import {useState} from "react";
+import {useRouter} from "next/router";
 import {
   getAuth,
   createUserWithEmailAndPassword,
@@ -22,7 +22,6 @@ import styles from "../../styles/Home.module.css";
 const SignupForm = () => {
   const router = useRouter();
   const auth = getAuth(firebaseApp);
-
   const [signupEmail, setSignupEmail] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
   const [signupPassConf, setSignupPassConf] = useState("");
@@ -52,29 +51,25 @@ const SignupForm = () => {
       return null;
     }
     setPersistence(auth, browserSessionPersistence)
-      .then(() => {
-        return createUserWithEmailAndPassword(
-          auth,
-          signupEmail,
-          signupPassword
-        ).then((userCredential) => {
-          const user = userCredential.user;
-          // console.log(`The user '${user.uid}' has signed up.`);
-          setIsError(false);
-          setSignupEmail("");
-          setSignupNotification("Signed up, logging in ...");
-          setTimeout(() => setSignupNotification(""), 2000);
-          router.push({
-            pathname: "/[user]",
-            query: {
-              user: user.uid,
-              name: signupEmail.match(/^([^@]*)@/)[1],
-            },
-          });
+      .then(() =>
+        createUserWithEmailAndPassword(auth, signupEmail, signupPassword)
+      )
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(`The user '${user.uid}' has signed up.`);
+        setIsError(false);
+        setSignupEmail("");
+        setSignupNotification("Signing in new user ...");
+        setTimeout(() => setSignupNotification(""), 2000);
+        router.push({
+          pathname: "/users/[user]",
+          query: {
+            user: user.email.match(/^([^@]*)@/)[1],
+          },
         });
       })
       .catch((err) => {
-        // console.log(err.code, err.message);
+        console.log(err.code, err.message);
         setIsError(true);
         setSignupNotification(err.message);
         setTimeout(() => setSignupNotification(""), 3000);
@@ -123,4 +118,5 @@ const SignupForm = () => {
     </div>
   );
 };
+
 export default SignupForm;
