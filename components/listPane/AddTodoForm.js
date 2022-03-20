@@ -1,10 +1,7 @@
 import {useState} from "react";
-import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/Loggedin.module.css";
-
-library.add(faPlus);
 
 const AddTodoForm = ({isDisabled, onAddTodo}) => {
   const [title, setTitle] = useState("");

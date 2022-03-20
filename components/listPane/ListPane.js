@@ -10,20 +10,14 @@ import {
   faSortDown,
   faSortUp,
   faArrowLeft,
+  faTableList,
 } from "@fortawesome/free-solid-svg-icons";
 import {firebaseApp} from "../../config/firebaseConfig";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import styles from "../../styles/Loggedin.module.css";
 
-const ListPane = ({
-  user,
-  todoList,
-  isDisabled,
-  onFetchData,
-  onSortTodos,
-  onRestoreLists,
-}) => {
+const ListPane = ({user, todoList, onFetchData, onSortTodos}) => {
   const db = getFirestore(firebaseApp);
 
   const addTodo = async (newTodo) => {
@@ -60,16 +54,15 @@ const ListPane = ({
     }
   };
 
-  const handleSort = () => onSortTodos();
-
   return (
     <div className={styles.maincontent}>
-      {todoList.id === "Search Result" && (
+      {todoList.id !== "Login" && todoList.id.includes("Search: ") && (
         <button
           className={`${styles.iconAddTodo} ${styles.restoreButton}`}
           type='button'
-          onClick={onRestoreLists}>
-          <FontAwesomeIcon icon={faArrowLeft} /> Next
+          onClick={() => onFetchData()}>
+          <FontAwesomeIcon icon={faArrowLeft} />{" "}
+          <FontAwesomeIcon icon={faTableList} />
         </button>
       )}
       {todoList.id === "Login" ? (
@@ -86,7 +79,9 @@ const ListPane = ({
         <>
           <h2>
             {todoList.id}
-            <span className={styles.spanClickable} onClick={handleSort}>
+            <span
+              className={styles.spanClickable}
+              onClick={() => onSortTodos()}>
               {todoList.isReverse ? (
                 <FontAwesomeIcon icon={faSortUp} />
               ) : (
@@ -96,11 +91,13 @@ const ListPane = ({
           </h2>
           <TodoList
             list={todoList.todos}
-            isDisabled={isDisabled}
+            isDisabled={
+              todoList.id === "Welcome" || todoList.id.includes("Search: ")
+            }
             onRemoveTodo={removeTodo}
           />
         </>
-      ) : todoList.id === "Search Result" ? (
+      ) : todoList.id.includes("Search: ") ? (
         <>
           <h2>{todoList.id}</h2>
           <p>No matching list item.</p>
@@ -112,7 +109,9 @@ const ListPane = ({
         </>
       )}
       <AddTodoForm
-        isDisabled={isDisabled || todoList.id === "Welcome"}
+        isDisabled={
+          todoList.id === "Welcome" || todoList.id.includes("Search: ")
+        }
         onAddTodo={addTodo}
       />
     </div>

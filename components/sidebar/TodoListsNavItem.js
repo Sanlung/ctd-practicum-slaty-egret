@@ -1,10 +1,7 @@
-import {faDeleteLeft, faFontAwesome} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {library} from "@fortawesome/fontawesome-svg-core";
+import {faEraser} from "@fortawesome/free-solid-svg-icons";
 import {faCircle} from "@fortawesome/free-regular-svg-icons";
 import styles from "../../styles/Loggedin.module.css";
-
-library.add(faCircle, faDeleteLeft);
 
 const TodoListsNavItem = ({
   listName,
@@ -24,7 +21,7 @@ const TodoListsNavItem = ({
       <span
         className={`${styles.iconDelete} ${styles.spanClickable}`}
         onClick={() => onRemoveList(listName)}>
-        <FontAwesomeIcon icon={faDeleteLeft} />
+        <FontAwesomeIcon icon={faEraser} />
       </span>
     </li>
   );

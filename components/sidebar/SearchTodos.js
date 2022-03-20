@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import style from "../../styles/Loggedin.module.css";
 
-const SearchTodos = ({isDisabled, onSearchTodos}) => {
+const SearchTodos = ({onSearchTodos}) => {
   const [title, setTitle] = useState();
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -16,10 +16,7 @@ const SearchTodos = ({isDisabled, onSearchTodos}) => {
 
   return (
     <form className={style.searchTodo} onSubmit={handleSearch}>
-      <button
-        className={style.iconAddTodo}
-        type='submit'
-        disabled={isDisabled || !title}>
+      <button className={style.iconAddTodo} type='submit' disabled={!title}>
         <FontAwesomeIcon icon={faSearch} />
       </button>
       <input

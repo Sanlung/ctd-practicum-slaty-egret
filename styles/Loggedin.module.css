@@ -3,10 +3,12 @@
 .container {
   width: 90%;
   max-width: 112.5rem;
+  min-height: 75vh;
   margin: 0 auto;
   padding: 5rem 2rem;
   border-radius: 1rem;
   position: relative;
+  display: flex;
   color: rgba(204, 194, 194, 0.904);
   background-color: rgba(93, 158, 158, 0.09);
   backdrop-filter: blur(0.4rem);
@@ -21,8 +23,8 @@
   border-radius: 1rem;
   display: flex;
   flex-flow: column;
-  overflow: hidden;
   position: fixed;
+  overflow: hidden;
   margin-right: auto;
   z-index: 3;
   background: rgba(0, 0, 0, 0.2);
@@ -149,11 +151,10 @@
 
 .maincontent {
   min-height: 65vh;
-  height: calc(100% - 10rem);
   margin-left: 7rem;
-  width: calc(100%-7rem);
   padding: 2rem;
   display: flex;
+  flex-grow: 1;
   flex-flow: column;
   border-radius: 1rem;
   background-color: rgba(93, 158, 158, 0.09);
@@ -227,12 +228,9 @@
 }
 
 @media only screen and (min-width: 62.5em) {
-  .container {
-    display: flex;
-  }
-
   .sidebar {
     width: 35%;
+    height: auto;
     padding: 2rem;
     position: relative;
   }
@@ -243,7 +241,6 @@
   }
 
   .maincontent {
-    flex-grow: 1;
     margin-left: 2rem;
   }
 
