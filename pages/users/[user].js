@@ -7,6 +7,7 @@ import Layout, {siteTitle} from "../../components/Layout";
 import Sidebar from "../../components/sidebar/Sidebar";
 import ListPane from "../../components/listPane/ListPane";
 import styles from "../../styles/Loggedin.module.css";
+import {connectAuthEmulator} from "firebase/auth";
 
 const User = () => {
   const [todoLists, setTodoLists] = useState([]);
@@ -15,9 +16,7 @@ const User = () => {
     todos: [],
     isReverse: false,
   });
-  const [restoredLists, setRestoredLists] = useState([]);
-  const [restoredList, setRestoredList] = useState({});
-  const [isUpdateDisabled, setIsUpdateDisabled] = useState(false);
+  const [backupLists, setBackupLists] = useState([]);
   const db = getFirestore(firebaseApp);
   const {authUser} = useAuth();
 
@@ -39,6 +38,7 @@ const User = () => {
               ...doc.data(),
             }));
             setTodoLists(lists);
+            setBackupLists(JSON.parse(JSON.stringify(lists)));
             if (newTitle) {
               setTodoList({
                 id: newTitle,
@@ -46,16 +46,18 @@ const User = () => {
                 isReverse: false,
               });
             } else {
-              const listStatus = lists.filter((el) => el.id === todoList.id);
-              listStatus.length
+              const activeList = JSON.parse(
+                JSON.stringify(lists.filter((el) => el.id === todoList.id))
+              );
+              activeList.length
                 ? setTodoList({
-                    id: listStatus[0].id,
-                    todos: listStatus[0].todos,
+                    id: activeList[0].id,
+                    todos: activeList[0].todos,
                     isReverse: false,
                   })
                 : setTodoList({
                     id: lists[0].id,
-                    todos: lists[0].todos,
+                    todos: JSON.parse(JSON.stringify(lists[0].todos)),
                     isReverse: false,
                   });
             }
@@ -73,29 +75,31 @@ const User = () => {
   }, [fetchUserData]);
 
   const displayList = (listName) => {
-    for (let list of todoLists) {
-      if (list.id === listName)
-        setTodoList({
-          id: list.id,
-          todos: list.todos,
-          isReverse: false,
-        });
+    if (todoList.id !== listName) {
+      for (let i = 0; i < backupLists.length; i++) {
+        if (backupLists[i].id === listName) {
+          if (todoList.id.includes("Search: ")) {
+            setTodoLists(JSON.parse(JSON.stringify(backupLists)));
+          }
+          setTodoList(JSON.parse(JSON.stringify(backupLists[i])));
+          console.log(todoList);
+          break;
+        }
+      }
     }
   };
 
   const searchTodos = (searchTerm) => {
-    setRestoredLists(todoLists);
-    setRestoredList(todoList);
-    const listHits = todoLists.filter((list) =>
+    const listHits = backupLists.filter((list) =>
       list.id.toLowerCase().includes(searchTerm.toLowerCase())
     );
     const itemHits = {
-      id: "Search Result",
+      id: `Search: ${searchTerm}`,
       todos: [],
       isReverse: false,
     };
-    for (let i = 0; i < todoLists.length; i++) {
-      let todos = todoLists[i].todos;
+    for (let i = 0; i < backupLists.length; i++) {
+      let todos = backupLists[i].todos;
       for (let j = 0; j < todos.length; j++) {
         if (todos[j].todo.toLowerCase().includes(searchTerm.toLowerCase()))
           itemHits.todos.push(todos[j]);
@@ -103,13 +107,6 @@ const User = () => {
     }
     setTodoLists(listHits);
     setTodoList(itemHits);
-    setIsUpdateDisabled(true);
-  };
-
-  const restoreLists = () => {
-    setTodoLists(restoredLists);
-    setTodoList(restoredList);
-    setIsUpdateDisabled(false);
   };
 
   const sortTodos = () => {
@@ -133,7 +130,7 @@ const User = () => {
           user={authUser}
           todoList={todoList}
           todoLists={todoLists}
-          isDisabled={isUpdateDisabled}
+          backupLists={backupLists}
           onFetchData={fetchUserData}
           onSearchTodos={searchTodos}
           onDisplayList={displayList}
@@ -141,10 +138,8 @@ const User = () => {
         <ListPane
           user={authUser}
           todoList={todoList}
-          isDisabled={isUpdateDisabled}
           onFetchData={fetchUserData}
           onSortTodos={sortTodos}
-          onRestoreLists={restoreLists}
         />
       </div>
     </Layout>

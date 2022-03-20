@@ -11,7 +11,7 @@ const Sidebar = ({
   user,
   todoList,
   todoLists,
-  isDisabled,
+  backupLists,
   onFetchData,
   onSearchTodos,
   onDisplayList,
@@ -19,9 +19,11 @@ const Sidebar = ({
   const db = getFirestore(firebaseApp);
 
   const addTodoList = async (newTitle) => {
-    for (let i = 0; i < todoLists.length; i++) {
-      if (todoLists[i].id.toLowerCase() === newTitle.toLowerCase()) {
-        alert(`You already have a list named '${newTitle}'. Try again.`);
+    for (let i = 0; i < backupLists.length; i++) {
+      if (backupLists[i].id.toLowerCase() === newTitle.toLowerCase()) {
+        alert(
+          `You already have a list named '${activeLists[i].id}'. Try again.`
+        );
         return;
       }
     }
@@ -54,21 +56,21 @@ const Sidebar = ({
         </span>
         <span>{user ? user.email.match(/^([^@]*)@/)[1] : " "}</span>
       </p>
-      <SearchTodos isDisabled={isDisabled} onSearchTodos={onSearchTodos} />
+      <SearchTodos onSearchTodos={onSearchTodos} />
       {todoLists.length !== 0 ? (
         <TodoListsNav
           todoLists={todoLists}
           onDisplayList={onDisplayList}
           onRemoveList={removeList}
         />
-      ) : isDisabled ? (
-        <div className={styles.sidebarMsg}>No matching list title.</div>
       ) : todoList.id === "Login" ? (
         <div className={styles.sidebarMsg}>Loading ...</div>
+      ) : todoList.id === "Welcome" ? (
+        <div className={styles.sidebarMsg}>Create a new list here.</div>
       ) : (
-        <div className={styles.sidebarMsg}>Create a new todo list here.</div>
+        <div className={styles.sidebarMsg}>No matching list title.</div>
       )}
-      <AddTodoListForm isDisabled={isDisabled} onAddTodoList={addTodoList} />
+      <AddTodoListForm onAddTodoList={addTodoList} />
     </aside>
   );
 };

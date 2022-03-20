@@ -1,11 +1,9 @@
 import {useState} from "react";
-import {library} from "@fortawesome/fontawesome-svg-core";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus} from "@fortawesome/free-solid-svg-icons";
 import styles from "../../styles/Loggedin.module.css";
 
-library.add(faPlus);
-const AddTodoListForm = ({isDisabled, onAddTodoList}) => {
+const AddTodoListForm = ({onAddTodoList}) => {
   const [title, setTitle] = useState("");
 
   const handleTitleChange = (e) => setTitle(e.target.value);
@@ -18,10 +16,7 @@ const AddTodoListForm = ({isDisabled, onAddTodoList}) => {
 
   return (
     <form className={styles.newListForm} onSubmit={handleSubmit}>
-      <button
-        className={styles.iconAddTodo}
-        type='submit'
-        disabled={isDisabled || !title}>
+      <button className={styles.iconAddTodo} type='submit' disabled={!title}>
         <FontAwesomeIcon icon={faPlus} />
       </button>
       <input
