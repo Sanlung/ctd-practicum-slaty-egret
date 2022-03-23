@@ -16,7 +16,7 @@ const Footer = () => (
         <a href='https://github.com/Asel-K' target='_blank' rel='noreferrer'>
           <img
             className='avatarLink'
-            src='./images/asel-profile.png'
+            src='/images/asel-profile.png'
             alt='Asel avatar and GitHub link'
           />
         </a>
@@ -25,7 +25,7 @@ const Footer = () => (
         <a href='https://github.com/Sanlung' target='_blank' rel='noreferrer'>
           <img
             className='avatarLink'
-            src='./images/chung-profile.jpeg'
+            src='/images/chung-profile.jpeg'
             alt='Chung Kao avatar and GitHub link'
           />
         </a>
@@ -34,7 +34,7 @@ const Footer = () => (
         <a href='https://github.com/dumpidum' target='blank' rel='noreferrer'>
           <img
             className='avatarLink'
-            src='./images/ignat-profile.png'
+            src='/images/ignat-profile.png'
             alt='Ignat avatar and GitHub link'
           />
         </a>
