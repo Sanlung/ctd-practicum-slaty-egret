@@ -1,10 +1,12 @@
-import Image from "next/image";
-import Whatodogrey from "../../public/images/whatodo-grey.svg";
-
 const Logo = () => {
   return (
     <div className='logo'>
-      <Image src={Whatodogrey} alt='Logo' height='50' width='120' />
+      <img
+        src='./images/whatodo-grey.svg'
+        alt='Site logo'
+        height='50'
+        width={120}
+      />
     </div>
   );
 };
