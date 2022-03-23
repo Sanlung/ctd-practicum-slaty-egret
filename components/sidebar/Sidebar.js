@@ -11,7 +11,7 @@ const Sidebar = ({
   user,
   todoList,
   todoLists,
-  backupLists,
+  listsRef,
   onFetchData,
   onSearchTodos,
   onDisplayList,
@@ -19,8 +19,8 @@ const Sidebar = ({
   const db = getFirestore(firebaseApp);
 
   const addTodoList = async (newTitle) => {
-    for (let i = 0; i < backupLists.length; i++) {
-      if (backupLists[i].id.toLowerCase() === newTitle.toLowerCase()) {
+    for (let i = 0; i < listsRef.length; i++) {
+      if (listsRef[i].id.toLowerCase() === newTitle.toLowerCase()) {
         alert(
           `You already have a list named '${activeLists[i].id}'. Try again.`
         );
@@ -30,7 +30,6 @@ const Sidebar = ({
     try {
       const docRef = doc(db, user.uid, newTitle);
       await setDoc(docRef, {todos: []});
-      console.log(`'${docRef.id}' added to account '${user.uid}'`);
       onFetchData(docRef.id);
     } catch (err) {
       console.error(err.name, err.message);
@@ -41,7 +40,6 @@ const Sidebar = ({
     try {
       const docRef = doc(db, user.uid, listName);
       await deleteDoc(docRef);
-      console.log(`'${docRef.id}' deleted from account '${user.uid}'`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);

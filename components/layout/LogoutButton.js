@@ -9,14 +9,9 @@ const LogoutButton = () => {
   const {authUser} = useAuth();
 
   const handleLogout = (e) => {
-    signOut(auth)
-      .then(() => {
-        console.log(`The user '${authUser.uid}' has signed out.`);
-        router.push("/");
-      })
-      .catch((err) => {
-        console.log(err.code, err.message);
-      });
+    signOut(auth).catch((err) => {
+      console.log(err.code, err.message);
+    });
   };
 
   return (

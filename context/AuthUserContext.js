@@ -15,8 +15,15 @@ const useAuthUser = () => {
           uid: user.uid,
           email: user.email,
         });
+        router.push({
+          pathname: "/users/[user]",
+          query: {
+            user: user.email.match(/^([^@]*)@/)[1],
+          },
+        });
       } else {
         setAuthUser(null);
+        router.push("/");
       }
     });
     return () => unsubscribe();
