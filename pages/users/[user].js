@@ -1,5 +1,5 @@
 import Head from "next/head";
-import {useState, useEffect, useCallback} from "react";
+import {useRef, useState, useEffect, useCallback} from "react";
 import {getFirestore, collection, getDocs} from "firebase/firestore";
 import {firebaseApp} from "../../config/firebaseConfig";
 import {useAuth} from "../../context/AuthUserContext";
@@ -10,13 +10,14 @@ import styles from "../../styles/Loggedin.module.css";
 import {connectAuthEmulator} from "firebase/auth";
 
 const User = () => {
-  const [todoLists, setTodoLists] = useState([]);
-  const [todoList, setTodoList] = useState({
+  const listsRef = useRef([]);
+  const listRef = useRef({
     id: "Login",
     todos: [],
     isReverse: false,
   });
-  const [backupLists, setBackupLists] = useState([]);
+  const [todoLists, setTodoLists] = useState(listsRef.current);
+  const [todoList, setTodoList] = useState(listRef.current);
   const db = getFirestore(firebaseApp);
   const {authUser} = useAuth();
 
@@ -37,8 +38,8 @@ const User = () => {
               id: doc.id,
               ...doc.data(),
             }));
-            setTodoLists(lists);
-            setBackupLists(JSON.parse(JSON.stringify(lists)));
+            listsRef.current = lists;
+            setTodoLists(listsRef.current);
             if (newTitle) {
               setTodoList({
                 id: newTitle,
@@ -46,20 +47,24 @@ const User = () => {
                 isReverse: false,
               });
             } else {
-              const activeList = JSON.parse(
-                JSON.stringify(lists.filter((el) => el.id === todoList.id))
+              const activeList = lists.filter(
+                (el) => el.id === listRef.current.id
               );
-              activeList.length
-                ? setTodoList({
-                    id: activeList[0].id,
-                    todos: activeList[0].todos,
-                    isReverse: false,
-                  })
-                : setTodoList({
-                    id: lists[0].id,
-                    todos: JSON.parse(JSON.stringify(lists[0].todos)),
-                    isReverse: false,
-                  });
+              if (activeList.length) {
+                listRef.current = {
+                  id: activeList[0].id,
+                  todos: activeList[0].todos,
+                  isReverse: false,
+                };
+                setTodoList(listRef.current);
+              } else {
+                listRef.current = {
+                  id: lists[0].id,
+                  todos: lists[0].todos,
+                  isReverse: false,
+                };
+                setTodoList(listRef.current);
+              }
             }
           }
         } catch (err) {
@@ -75,22 +80,22 @@ const User = () => {
   }, [fetchUserData]);
 
   const displayList = (listName) => {
-    if (todoList.id !== listName) {
-      for (let i = 0; i < backupLists.length; i++) {
-        if (backupLists[i].id === listName) {
-          if (todoList.id.includes("Search: ")) {
-            setTodoLists(JSON.parse(JSON.stringify(backupLists)));
+    if (listRef.current.id !== listName) {
+      for (let i = 0; i < listsRef.current.length; i++) {
+        if (listsRef.current[i].id === listName) {
+          if (listRef.current.id.includes("Search: ")) {
+            setTodoLists(listsRef.current);
           }
-          setTodoList(JSON.parse(JSON.stringify(backupLists[i])));
-          console.log(todoList);
-          break;
+          listRef.current = listsRef.current[i];
+          setTodoList(listRef.current);
+          return;
         }
       }
     }
   };
 
   const searchTodos = (searchTerm) => {
-    const listHits = backupLists.filter((list) =>
+    const listHits = listsRef.current.filter((list) =>
       list.id.toLowerCase().includes(searchTerm.toLowerCase())
     );
     const itemHits = {
@@ -98,15 +103,16 @@ const User = () => {
       todos: [],
       isReverse: false,
     };
-    for (let i = 0; i < backupLists.length; i++) {
-      let todos = backupLists[i].todos;
+    for (let i = 0; i < listsRef.current.length; i++) {
+      let todos = listsRef.current[i].todos;
       for (let j = 0; j < todos.length; j++) {
         if (todos[j].todo.toLowerCase().includes(searchTerm.toLowerCase()))
           itemHits.todos.push(todos[j]);
       }
     }
     setTodoLists(listHits);
-    setTodoList(itemHits);
+    listRef.current = itemHits;
+    setTodoList(listRef.current);
   };
 
   const sortTodos = () => {
@@ -130,7 +136,7 @@ const User = () => {
           user={authUser}
           todoList={todoList}
           todoLists={todoLists}
-          backupLists={backupLists}
+          listsRef={listsRef}
           onFetchData={fetchUserData}
           onSearchTodos={searchTodos}
           onDisplayList={displayList}

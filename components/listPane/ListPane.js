@@ -34,7 +34,6 @@ const ListPane = ({user, todoList, onFetchData, onSortTodos}) => {
       await updateDoc(docRef, {
         todos: arrayUnion({timeStamp: Date.now(), todo: newTodo}),
       });
-      console.log(`'${newTodo}' added to the '${docRef.id}' list.`);
       onFetchData();
     } catch (err) {
       console.error(err.name, err.message);
@@ -42,15 +41,16 @@ const ListPane = ({user, todoList, onFetchData, onSortTodos}) => {
   };
 
   const removeTodo = async (item) => {
-    try {
-      const docRef = doc(db, user.uid, todoList.id);
-      await updateDoc(docRef, {
-        todos: arrayRemove(item),
-      });
-      console.log(`'${item.todo}' removed from the '${docRef.id}' list.`);
-      onFetchData();
-    } catch (err) {
-      console.error(err.name, err.message);
+    if (!todoList.id.includes("Search: ")) {
+      try {
+        const docRef = doc(db, user.uid, todoList.id);
+        await updateDoc(docRef, {
+          todos: arrayRemove(item),
+        });
+        onFetchData();
+      } catch (err) {
+        console.error(err.name, err.message);
+      }
     }
   };
 
@@ -71,7 +71,7 @@ const ListPane = ({user, todoList, onFetchData, onSortTodos}) => {
         <>
           <h2>{todoList.id}</h2>
           <p>
-            Let&apos;s get started by creating a new list and add todos to the
+            Let&apos;s get started by creating a new list, and add todos to the
             list or creating other lists.
           </p>
         </>
@@ -89,13 +89,7 @@ const ListPane = ({user, todoList, onFetchData, onSortTodos}) => {
               )}
             </span>
           </h2>
-          <TodoList
-            list={todoList.todos}
-            isDisabled={
-              todoList.id === "Welcome" || todoList.id.includes("Search: ")
-            }
-            onRemoveTodo={removeTodo}
-          />
+          <TodoList list={todoList.todos} onRemoveTodo={removeTodo} />
         </>
       ) : todoList.id.includes("Search: ") ? (
         <>

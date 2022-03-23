@@ -57,7 +57,7 @@ And you have the app in port `localhost:3000`.
 
 Sign up with an email and set your password, and enjoy your own todo app.
 
-<p><img width="480" src="./public/images/project-pic1.svg" alt="Whatodo App logged in page"/> <img width="115" src="./public/images/project-pic3.svg" alt="Whatodo App logged in page - mobile"/> <img width="115" src="./public/images/project-pic4.svg" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
+<p><img width="480" src="./public/images/project-pic1.svg" alt="Whatodo App logged in page"/> <img width="123" src="./public/images/project-pic3.svg" alt="Whatodo App logged in page - mobile"/> <img width="123" src="./public/images/project-pic4.svg" alt="Whatodo App logged in page - mobile sidebar toggle"/></p>
 
 You can sort a list chronologically, and may search items in the lists or list names for a certain keyword.
 

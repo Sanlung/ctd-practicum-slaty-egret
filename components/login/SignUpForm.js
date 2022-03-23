@@ -56,17 +56,9 @@ const SignupForm = () => {
       )
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`The user '${user.uid}' has signed up.`);
         setIsError(false);
         setSignupEmail("");
         setSignupNotification("Signing in new user ...");
-        setTimeout(() => setSignupNotification(""), 2000);
-        router.push({
-          pathname: "/users/[user]",
-          query: {
-            user: user.email.match(/^([^@]*)@/)[1],
-          },
-        });
       })
       .catch((err) => {
         console.log(err.code, err.message);

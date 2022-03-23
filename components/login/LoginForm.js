@@ -41,17 +41,9 @@ const LoginForm = () => {
       .then(() => signInWithEmailAndPassword(auth, loginEmail, loginPassword))
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(`The user '${user.uid}' has signed in.`);
         setIsError(false);
         setLoginEmail("");
         setLoginNotification("Logging in ...");
-        setTimeout(() => setLoginNotification(""), 2000);
-        router.push({
-          pathname: "/users/[user]",
-          query: {
-            user: user.email.match(/^([^@]*)@/)[1],
-          },
-        });
       })
       .catch((err) => {
         console.log(err.code, err.message);
