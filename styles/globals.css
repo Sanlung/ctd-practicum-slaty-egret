@@ -157,6 +157,7 @@ footer {
 .avatarLink {
   filter: brightness(90%);
   border-radius: 50%;
+  width: 100%;
 }
 
 button {

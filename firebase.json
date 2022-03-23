@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": ".next/static/chunks/pages/",
+    "public": "out",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

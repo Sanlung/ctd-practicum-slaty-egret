@@ -1,9 +1,5 @@
-import Image from "next/image";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faGithub} from "@fortawesome/free-brands-svg-icons";
-import AselProfile from "../../public/images/asel-profile.png";
-import ChungProfile from "../../public/images/chung-profile.jpeg";
-import IgnatProfile from "../../public/images/ignat-profile.png";
 
 const Footer = () => (
   <footer>
@@ -18,28 +14,28 @@ const Footer = () => (
       </li>
       <li>
         <a href='https://github.com/Asel-K' target='_blank' rel='noreferrer'>
-          <Image
+          <img
             className='avatarLink'
-            src={AselProfile}
-            alt='Asel avatar link'
+            src='./images/asel-profile.png'
+            alt='Asel avatar and GitHub link'
           />
         </a>
       </li>
       <li>
         <a href='https://github.com/Sanlung' target='_blank' rel='noreferrer'>
-          <Image
+          <img
             className='avatarLink'
-            src={ChungProfile}
-            alt='Chung Kao avatar link'
+            src='./images/chung-profile.jpeg'
+            alt='Chung Kao avatar and GitHub link'
           />
         </a>
       </li>
       <li>
         <a href='https://github.com/dumpidum' target='blank' rel='noreferrer'>
-          <Image
+          <img
             className='avatarLink'
-            src={IgnatProfile}
-            alt='Ignat avatar link'
+            src='./images/ignat-profile.png'
+            alt='Ignat avatar and GitHub link'
           />
         </a>
       </li>
