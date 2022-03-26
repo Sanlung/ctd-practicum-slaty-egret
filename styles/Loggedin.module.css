@@ -23,7 +23,7 @@
   border-radius: 1rem;
   display: flex;
   flex-flow: column;
-  position: fixed;
+  position: absolute;
   overflow: hidden;
   margin-right: auto;
   z-index: 3;
